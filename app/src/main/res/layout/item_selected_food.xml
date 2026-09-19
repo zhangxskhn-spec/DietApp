@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 底部已选食物条目 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="4dp">
+
+    <TextView
+        android:id="@+id/tv_sel_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="14sp"
+        android:textColor="@color/text_primary" />
+
+    <TextView
+        android:id="@+id/tv_sel_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="@color/text_secondary"
+        android:layout_marginEnd="8dp" />
+
+    <TextView
+        android:id="@+id/tv_sel_cal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="@color/orange_dark"
+        android:textStyle="bold"
+        android:layout_marginEnd="12dp" />
+
+    <TextView
+        android:id="@+id/tv_sel_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="✕"
+        android:textSize="16sp"
+        android:textColor="@color/red"
+        android:padding="4dp" />
+</LinearLayout>

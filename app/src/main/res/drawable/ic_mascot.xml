@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 🐱 可爱猫咪头像大号 - 轻健康风格 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="80dp"
+    android:height="80dp"
+    android:viewportWidth="80"
+    android:viewportHeight="80">
+    <!-- 猫脸 -->
+    <path android:fillColor="#6EA77A"
+        android:pathData="M40,18 C56,18 68,30 68,45 C68,60 56,72 40,72 C24,72 12,60 12,45 C12,30 24,18 40,18Z"/>
+    <!-- 浅色内脸 -->
+    <path android:fillColor="#DCECD9"
+        android:pathData="M40,26 C52,26 60,36 60,48 C60,60 52,66 40,66 C28,66 20,60 20,48 C20,36 28,26 40,26Z"/>
+    <!-- 左耳 -->
+    <path android:fillColor="#6EA77A"
+        android:pathData="M18,20 L8,2 L30,12 Z"/>
+    <!-- 右耳 -->
+    <path android:fillColor="#6EA77A"
+        android:pathData="M62,20 L72,2 L50,12 Z"/>
+    <!-- 左耳内粉色 -->
+    <path android:fillColor="#F5A0B8"
+        android:pathData="M19,18 L12,6 L28,13 Z"/>
+    <!-- 右耳内粉色 -->
+    <path android:fillColor="#F5A0B8"
+        android:pathData="M61,18 L68,6 L52,13 Z"/>
+    <!-- 左眼 -->
+    <path android:fillColor="#243126"
+        android:pathData="M28,40 C28,36 31,34 35,34 C39,34 40,36 40,40 C40,44 39,46 35,46 C31,46 28,44 28,40Z"/>
+    <!-- 右眼 -->
+    <path android:fillColor="#243126"
+        android:pathData="M44,40 C44,36 47,34 51,34 C55,34 56,36 56,40 C56,44 55,46 51,46 C47,46 44,44 44,40Z"/>
+    <!-- 左眼高光 -->
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M31,38 C31,36 32,35 33,35 C34,35 35,36 35,38 C35,40 34,40 33,40 C32,40 31,40 31,38Z"/>
+    <!-- 右眼高光 -->
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M47,38 C47,36 48,35 49,35 C50,35 51,36 51,38 C51,40 50,40 49,40 C48,40 47,40 47,38Z"/>
+    <!-- 鼻子 -->
+    <path android:fillColor="#F5A0B8"
+        android:pathData="M40,49 L37,53 L43,53 Z"/>
+    <!-- 嘴巴 -->
+    <path android:fillColor="@android:color/transparent"
+        android:strokeColor="#243126"
+        android:strokeWidth="1.5"
+        android:pathData="M37,55 C39,58 41,58 43,55"/>
+    <!-- 左胡须 -->
+    <path android:fillColor="@android:color/transparent"
+        android:strokeColor="#365B40"
+        android:strokeWidth="1.2"
+        android:pathData="M22,50 L10,47 M22,54 L10,54 M22,58 L10,61"/>
+    <!-- 右胡须 -->
+    <path android:fillColor="@android:color/transparent"
+        android:strokeColor="#365B40"
+        android:strokeWidth="1.2"
+        android:pathData="M58,50 L70,47 M58,54 L70,54 M58,58 L70,61"/>
+</vector>

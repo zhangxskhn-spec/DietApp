@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>轻食记 Icon — 突破框架</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #1a1a2e;
+      font-family: -apple-system, 'PingFang SC', 'Segoe UI', sans-serif;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      color: #e0e0e0;
+    }
+    h1 { font-size: 24px; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 13px; color: #888; margin-bottom: 36px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      max-width: 1100px;
+      width: 100%;
+    }
+    .card {
+      background: #16213e;
+      border-radius: 20px;
+      padding: 28px;
+      border: 1px solid #233;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: border-color 0.3s;
+    }
+    .card:hover { border-color: #4CAF50; }
+    .card h2 { font-size: 16px; margin-bottom: 4px; color: #fff; }
+    .card .desc { font-size: 12px; color: #888; margin-bottom: 18px; text-align: center; line-height: 1.6; }
+    .badge {
+      display: inline-block; padding: 2px 8px;
+      background: #0f3460; color: #53a8b6;
+      font-size: 10px; font-weight: 700; border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .icon-wrap {
+      position: relative; margin-bottom: 20px;
+    }
+    canvas {
+      border-radius: 22.5%;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .sizes { display: flex; gap: 10px; align-items: flex-end; }
+    .sizes canvas { border-radius: 22.5%; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    .size-label { text-align: center; color: #666; font-size: 9px; margin-top: 3px; }
+    .pick-btn {
+      margin-top: 14px; padding: 8px 24px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff; border: none; border-radius: 10px;
+      font-size: 13px; cursor: pointer; font-weight: 600;
+      transition: transform 0.15s;
+    }
+    .pick-btn:hover { transform: scale(1.04); }
+  </style>
+</head>
+<body>
+
+<h1>🥗 轻食记 — Icon 重设计</h1>
+<p class="subtitle">跳出绿色框架 · 四个全新方向</p>
+
+<div class="grid">
+
+  <!-- 方案 D：渐变几何 -->
+  <div class="card">
+    <span class="badge">方案 D</span>
+    <h2>渐变几何</h2>
+    <p class="desc">紫→蓝→青渐变色块 + 负空间切出「碗」的形状<br>像 Linear / Arc 那种高级科技感</p>
+    <div class="icon-wrap"><canvas id="iconD" width="192" height="192"></canvas></div>
+    <div class="sizes">
+      <div><canvas id="iconD_48" width="48" height="48"></canvas><div class="size-label">48dp</div></div>
+      <div><canvas id="iconD_72" width="72" height="72"></canvas><div class="size-label">72dp</div></div>
+      <div><canvas id="iconD_96" width="96" height="96"></canvas><div class="size-label">96dp</div></div>
+    </div>
+    <button class="pick-btn" onclick="select('D')">选择方案 D</button>
+  </div>
+
+  <!-- 方案 E：文字标识 -->
+  <div class="card">
+    <span class="badge">方案 E</span>
+    <h2>「食」字极简</h2>
+    <p class="desc">宋体「食」字几何化重构<br>中文文化感 + 现代极简，像「墨」那样的文字 logo</p>
+    <div class="icon-wrap"><canvas id="iconE" width="192" height="192"></canvas></div>
+    <div class="sizes">
+      <div><canvas id="iconE_48" width="48" height="48"></canvas><div class="size-label">48dp</div></div>
+      <div><canvas id="iconE_72" width="72" height="72"></canvas><div class="size-label">72dp</div></div>
+      <div><canvas id="iconE_96" width="96" height="96"></canvas><div class="size-label">96dp</div></div>
+    </div>
+    <button class="pick-btn" onclick="select('E')">选择方案 E</button>
+  </div>
+
+  <!-- 方案 F：暖色渐变玻璃 -->
+  <div class="card">
+    <span class="badge">方案 F</span>
+    <h2>落日渐变</h2>
+    <p class="desc">橙→粉→紫日落渐变 + 中心柔光圆<br>温暖治愈感，和「轻食」的轻松调性吻合</p>
+    <div class="icon-wrap"><canvas id="iconF" width="192" height="192"></canvas></div>
+    <div class="sizes">
+      <div><canvas id="iconF_48" width="48" height="48"></canvas><div class="size-label">48dp</div></div>
+      <div><canvas id="iconF_72" width="72" height="72"></canvas><div class="size-label">72dp</div></div>
+      <div><canvas id="iconF_96" width="96" height="96"></canvas><div class="size-label">96dp</div></div>
+    </div>
+    <button class="pick-btn" onclick="select('F')">选择方案 F</button>
+  </div>
+
+  <!-- 方案 G：极简圆点 -->
+  <div class="card">
+    <span class="badge">方案 G</span>
+    <h2>像素营养</h2>
+    <p class="desc">3×3 彩色圆点网格，每个代表一种营养素<br>极简、独特、像密码一样的视觉语言</p>
+    <div class="icon-wrap"><canvas id="iconG" width="192" height="192"></canvas></div>
+    <div class="sizes">
+      <div><canvas id="iconG_48" width="48" height="48"></canvas><div class="size-label">48dp</div></div>
+      <div><canvas id="iconG_72" width="72" height="72"></canvas><div class="size-label">72dp</div></div>
+      <div><canvas id="iconG_96" width="96" height="96"></canvas><div class="size-label">96dp</div></div>
+    </div>
+    <button class="pick-btn" onclick="select('G')">选择方案 G</button>
+  </div>
+
+  <!-- 方案 H：液态金属 -->
+  <div class="card">
+    <span class="badge">方案 H</span>
+    <h2>液态滴落</h2>
+    <p class="desc">深色背景 + 一滴彩色液体溅开<br>像果汁滴落，抽象又有冲击力</p>
+    <div class="icon-wrap"><canvas id="iconH" width="192" height="192"></canvas></div>
+    <div class="sizes">
+      <div><canvas id="iconH_48" width="48" height="48"></canvas><div class="size-label">48dp</div></div>
+      <div><canvas id="iconH_72" width="72" height="72"></canvas><div class="size-label">72dp</div></div>
+      <div><canvas id="iconH_96" width="96" height="96"></canvas><div class="size-label">96dp</div></div>
+    </div>
+    <button class="pick-btn" onclick="select('H')">选择方案 H</button>
+  </div>
+
+  <!-- 方案 I：玻璃拟态 -->
+  <div class="card">
+    <span class="badge">方案 I</span>
+    <h2>玻璃拟态</h2>
+    <p class="desc">毛玻璃卡片 + 彩色渐变底 + 白色图标<br>iOS 17 风格，精致通透</p>
+    <div class="icon-wrap"><canvas id="iconI" width="192" height="192"></canvas></div>
+    <div class="sizes">
+      <div><canvas id="iconI_48" width="48" height="48"></canvas><div class="size-label">48dp</div></div>
+      <div><canvas id="iconI_72" width="72" height="72"></canvas><div class="size-label">72dp</div></div>
+      <div><canvas id="iconI_96" width="96" height="96"></canvas><div class="size-label">96dp</div></div>
+    </div>
+    <button class="pick-btn" onclick="select('I')">选择方案 I</button>
+  </div>
+
+</div>
+
+<script>
+function rr(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.arcTo(x+w, y, x+w, y+r, r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.arcTo(x+w, y+h, x+w-r, y+h, r);
+  ctx.lineTo(x+r, y+h);
+  ctx.arcTo(x, y+h, x, y+h-r, r);
+  ctx.lineTo(x, y+r);
+  ctx.arcTo(x, y, x+r, y, r);
+  ctx.closePath();
+}
+
+// ═══ D: 渐变几何 ═══
+function drawD(ctx, s) {
+  // 背景渐变
+  const bg = ctx.createLinearGradient(0, 0, s, s);
+  bg.addColorStop(0, '#667eea');
+  bg.addColorStop(0.5, '#5b4fa0');
+  bg.addColorStop(1, '#764ba2');
+  ctx.fillStyle = bg;
+  rr(ctx, 0, 0, s, s, s * 0.22);
+  ctx.fill();
+
+  const cx = s/2, cy = s/2;
+
+  // 用合成模式"挖出"碗形负空间
+  ctx.save();
+  ctx.globalCompositeOperation = 'destination-out';
+
+  // 碗形 — 半圆
+  ctx.beginPath();
+  ctx.ellipse(cx, cy + s*0.06, s*0.3, s*0.2, 0, 0, Math.PI);
+  ctx.closePath();
+  ctx.fill();
+
+  // 碗上方 — 小三角缺口（筷子/叉子抽象）
+  ctx.beginPath();
+  ctx.moveTo(cx - s*0.04, cy - s*0.18);
+  ctx.lineTo(cx + s*0.04, cy - s*0.18);
+  ctx.lineTo(cx, cy - s*0.04);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.restore();
+
+  // 加一点光晕
+  ctx.save();
+  const glow = ctx.createRadialGradient(cx, cy - s*0.1, 0, cx, cy - s*0.1, s*0.35);
+  glow.addColorStop(0, 'rgba(255,255,255,0.08)');
+  glow.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = glow;
+  rr(ctx, 0, 0, s, s, s*0.22);
+  ctx.fill();
+  ctx.restore();
+}
+
+// ═══ E: 食字极简 ═══
+function drawE(ctx, s) {
+  // 纯黑背景
+  ctx.fillStyle = '#1a1a1a';
+  rr(ctx, 0, 0, s, s, s * 0.22);
+  ctx.fill();
+
+  const cx = s/2, cy = s/2;
+
+  // "食"字的几何化重构
+  // 用简单的矩形和三角形构成
+  ctx.fillStyle = '#ffffff';
+  const u = s * 0.06; // 基本单位
+
+  // 上部：人字头 (亠)
+  // 横
+  ctx.fillRect(cx - u*2.5, cy - u*3.8, u*5, u*0.8);
+  // 撇（用三角近似）
+  ctx.beginPath();
+  ctx.moveTo(cx - u*1.5, cy - u*3);
+  ctx.lineTo(cx - u*3, cy - u*1.5);
+  ctx.lineTo(cx - u*2.2, cy - u*1.5);
+  ctx.lineTo(cx - u*0.7, cy - u*3);
+  ctx.closePath();
+  ctx.fill();
+  // 捺
+  ctx.beginPath();
+  ctx.moveTo(cx + u*1.5, cy - u*3);
+  ctx.lineTo(cx + u*3, cy - u*1.5);
+  ctx.lineTo(cx + u*2.2, cy - u*1.5);
+  ctx.lineTo(cx + u*0.7, cy - u*3);
+  ctx.closePath();
+  ctx.fill();
+
+  // 中部：横
+  ctx.fillRect(cx - u*2.5, cy - u*1.5, u*5, u*0.7);
+
+  // 下部：良字的简化
+  // 日（方框）
+  ctx.fillRect(cx - u*1.8, cy - u*0.5, u*3.6, u*0.6);
+  ctx.fillRect(cx - u*1.8, cy + u*0.3, u*3.6, u*0.6);
+  // 中间竖
+  ctx.fillRect(cx - u*0.3, cy - u*0.5, u*0.6, u*1.4);
+
+  // 底部撇和点
+  ctx.beginPath();
+  ctx.moveTo(cx - u*1.8, cy + u*1.2);
+  ctx.lineTo(cx - u*3, cy + u*3.2);
+  ctx.lineTo(cx - u*2, cy + u*3.2);
+  ctx.lineTo(cx - u*0.8, cy + u*1.2);
+  ctx.closePath();
+  ctx.fill();
+
+  // 右下点
+  ctx.beginPath();
+  ctx.arc(cx + u*1.5, cy + u*2.5, u*0.5, 0, Math.PI*2);
+  ctx.fill();
+
+  // 彩色点缀 — 一个小绿点
+  ctx.fillStyle = '#4CAF50';
+  ctx.beginPath();
+  ctx.arc(cx + u*2.8, cy - u*3.8, u*0.5, 0, Math.PI*2);
+  ctx.fill();
+}
+
+// ═══ F: 落日渐变 ═══
+function drawF(ctx, s) {
+  const cx = s/2, cy = s/2;
+
+  // 暖色渐变背景
+  const bg = ctx.createLinearGradient(0, 0, s, s);
+  bg.addColorStop(0, '#f093fb');
+  bg.addColorStop(0.3, '#f5576c');
+  bg.addColorStop(0.6, '#ff9a56');
+  bg.addColorStop(1, '#ffecd2');
+  ctx.fillStyle = bg;
+  rr(ctx, 0, 0, s, s, s * 0.22);
+  ctx.fill();
+
+  // 中心柔光
+  const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, s*0.38);
+  glow.addColorStop(0, 'rgba(255,255,255,0.35)');
+  glow.addColorStop(0.6, 'rgba(255,255,255,0.08)');
+  glow.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, s, s);
+
+  // 白色圆形 + 内部小图案
+  ctx.fillStyle = 'rgba(255,255,255,0.92)';
+  ctx.beginPath();
+  ctx.arc(cx, cy, s*0.25, 0, Math.PI*2);
+  ctx.fill();
+
+  // 圆内 — 简笔勺子
+  ctx.strokeStyle = '#f5576c';
+  ctx.lineWidth = s * 0.025;
+  ctx.lineCap = 'round';
+  // 勺柄
+  ctx.beginPath();
+  ctx.moveTo(cx, cy + s*0.15);
+  ctx.lineTo(cx, cy - s*0.02);
+  ctx.stroke();
+  // 勺头
+  ctx.beginPath();
+  ctx.ellipse(cx, cy - s*0.08, s*0.06, s*0.08, 0, 0, Math.PI*2);
+  ctx.stroke();
+
+  // 装饰小圆点
+  ctx.fillStyle = 'rgba(255,255,255,0.5)';
+  [[-0.28,-0.28],[0.3,-0.25],[-0.25,0.3],[0.28,0.28]].forEach(([dx,dy]) => {
+    ctx.beginPath();
+    ctx.arc(cx+dx*s, cy+dy*s, s*0.02, 0, Math.PI*2);
+    ctx.fill();
+  });
+}
+
+// ═══ G: 像素营养 ═══
+function drawG(ctx, s) {
+  // 深灰背景
+  ctx.fillStyle = '#f0ece4';
+  rr(ctx, 0, 0, s, s, s * 0.22);
+  ctx.fill();
+
+  const cx = s/2, cy = s/2;
+  const gap = s * 0.18;
+  const r = s * 0.045;
+
+  // 3x3 彩色圆点 — 每个代表一种营养
+  const colors = [
+    '#FF6B6B', '#FFA94D', '#FFD43B',  // 红(铁) 橙(碳水) 黄(能量)
+    '#69DB7C', '#4CAF50', '#38D9A9',  // 浅绿(纤维) 绿(维C) 青(矿)
+    '#74C0FC', '#5C7CFA', '#B197FC',  // 蓝(水) 靛(蛋白) 紫(脂肪)
+  ];
+
+  let i = 0;
+  for (let row = -1; row <= 1; row++) {
+    for (let col = -1; col <= 1; col++) {
+      ctx.fillStyle = colors[i];
+      ctx.beginPath();
+      ctx.arc(cx + col*gap, cy + row*gap, r, 0, Math.PI*2);
+      ctx.fill();
+      // 高光
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.beginPath();
+      ctx.arc(cx + col*gap - r*0.2, cy + row*gap - r*0.2, r*0.35, 0, Math.PI*2);
+      ctx.fill();
+      i++;
+    }
+  }
+
+  // 中心点放大 + 白色边框
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = s * 0.012;
+  ctx.beginPath();
+  ctx.arc(cx, cy, r * 1.4, 0, Math.PI*2);
+  ctx.stroke();
+}
+
+// ═══ H: 液态滴落 ═══
+function drawH(ctx, s) {
+  // 深色背景
+  const bg = ctx.createLinearGradient(0, 0, 0, s);
+  bg.addColorStop(0, '#0d1117');
+  bg.addColorStop(1, '#161b22');
+  ctx.fillStyle = bg;
+  rr(ctx, 0, 0, s, s, s * 0.22);
+  ctx.fill();
+
+  const cx = s/2, cy = s/2;
+
+  // 主液滴 — 上方落下
+  const dropGrad = ctx.createRadialGradient(cx - s*0.05, cy - s*0.1, 0, cx, cy, s*0.3);
+  dropGrad.addColorStop(0, '#ff6b9d');
+  dropGrad.addColorStop(0.4, '#c44dff');
+  dropGrad.addColorStop(0.7, '#667eea');
+  dropGrad.addColorStop(1, '#4facfe');
+
+  // 溅开的形状
+  ctx.fillStyle = dropGrad;
+  ctx.beginPath();
+  // 主体
+  ctx.moveTo(cx, cy - s*0.2);
+  ctx.bezierCurveTo(cx - s*0.25, cy - s*0.1, cx - s*0.28, cy + s*0.1, cx - s*0.1, cy + s*0.22);
+  ctx.bezierCurveTo(cx - s*0.05, cy + s*0.28, cx + s*0.05, cy + s*0.28, cx + s*0.1, cy + s*0.22);
+  ctx.bezierCurveTo(cx + s*0.28, cy + s*0.1, cx + s*0.25, cy - s*0.1, cx, cy - s*0.2);
+  ctx.fill();
+
+  // 溅出的小液滴
+  ctx.fillStyle = '#ff6b9d';
+  ctx.beginPath();
+  ctx.arc(cx - s*0.22, cy + s*0.15, s*0.035, 0, Math.PI*2);
+  ctx.fill();
+
+  ctx.fillStyle = '#667eea';
+  ctx.beginPath();
+  ctx.arc(cx + s*0.25, cy + s*0.08, s*0.025, 0, Math.PI*2);
+  ctx.fill();
+
+  ctx.fillStyle = '#c44dff';
+  ctx.beginPath();
+  ctx.arc(cx + s*0.15, cy + s*0.28, s*0.02, 0, Math.PI*2);
+  ctx.fill();
+
+  // 高光
+  ctx.fillStyle = 'rgba(255,255,255,0.25)';
+  ctx.beginPath();
+  ctx.ellipse(cx - s*0.06, cy - s*0.08, s*0.08, s*0.06, -0.4, 0, Math.PI*2);
+  ctx.fill();
+}
+
+// ═══ I: 玻璃拟态 ═══
+function drawI(ctx, s) {
+  const cx = s/2, cy = s/2;
+
+  // 彩色渐变底层
+  const bg = ctx.createLinearGradient(0, 0, s, s);
+  bg.addColorStop(0, '#a8edea');
+  bg.addColorStop(0.5, '#fed6e3');
+  bg.addColorStop(1, '#d299c2');
+  ctx.fillStyle = bg;
+  rr(ctx, 0, 0, s, s, s * 0.22);
+  ctx.fill();
+
+  // 毛玻璃效果 — 模拟半透明白色层
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
+  rr(ctx, 0, 0, s, s, s * 0.22);
+  ctx.fill();
+
+  // 内部圆形毛玻璃卡片
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+  ctx.beginPath();
+  ctx.arc(cx, cy, s * 0.28, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 边缘高光
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+  ctx.lineWidth = s * 0.01;
+  ctx.beginPath();
+  ctx.arc(cx, cy, s * 0.28, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // 白色图标 — 简笔食物叉
+  ctx.strokeStyle = '#fff';
+  ctx.fillStyle = '#fff';
+  ctx.lineWidth = s * 0.025;
+  ctx.lineCap = 'round';
+
+  // 叉子柄
+  ctx.beginPath();
+  ctx.moveTo(cx, cy + s * 0.18);
+  ctx.lineTo(cx, cy - s * 0.05);
+  ctx.stroke();
+
+  // 叉齿
+  for (let i = -1; i <= 1; i++) {
+    ctx.beginPath();
+    ctx.moveTo(cx + i * s * 0.05, cy - s * 0.05);
+    ctx.lineTo(cx + i * s * 0.05, cy - s * 0.2);
+    ctx.stroke();
+  }
+
+  // 叉齿连接弧
+  ctx.beginPath();
+  ctx.arc(cx, cy - s * 0.2, s * 0.05, Math.PI, 0);
+  ctx.stroke();
+
+  // 左下装饰圆
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+  ctx.beginPath();
+  ctx.arc(cx - s * 0.18, cy + s * 0.2, s * 0.06, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 右上装饰圆
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+  ctx.beginPath();
+  ctx.arc(cx + s * 0.22, cy - s * 0.18, s * 0.04, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+// ═══ 渲染 ═══
+const plans = ['D','E','F','G','H','I'];
+const drawFns = { D: drawD, E: drawE, F: drawF, G: drawG, H: drawH, I: drawI };
+
+plans.forEach(p => {
+  ['48','72','96',''].forEach(sz => {
+    const id = 'icon' + p + (sz ? '_' + sz : '');
+    const c = document.getElementById(id);
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    ctx.clearRect(0, 0, c.width, c.height);
+    drawFns[p](ctx, c.width);
+  });
+});
+
+function select(plan) {
+  alert('已选择方案 ' + plan + '！接下来生成 Android 图标资源。');
+}
+</script>
+</body>
+</html>

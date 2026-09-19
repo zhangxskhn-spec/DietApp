@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.DietApp" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimaryDark">@color/green_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/orange</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorTertiary">@color/teal</item>
+        <item name="colorOnTertiary">@color/white</item>
+
+        <item name="android:windowBackground">@drawable/bg_app</item>
+        <item name="colorSurface">@color/card_bg</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorSurfaceVariant">@color/input_fill</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+
+        <item name="colorError">@color/red</item>
+        <item name="colorOnError">@color/white</item>
+
+        <item name="android:statusBarColor">@color/surface_elevated</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/surface_elevated</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <item name="bottomNavigationStyle">@style/Widget.DietApp.BottomNavigation</item>
+        <item name="textInputStyle">@style/Widget.DietApp.TextInput</item>
+
+        <item name="android:textViewStyle">@style/Widget.DietApp.TextView</item>
+    </style>
+
+    <style name="Widget.DietApp.TextView" parent="android:Widget.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.DietApp.Toolbar.Title" parent="TextAppearance.DietApp.PageTitle" />
+
+    <style name="TextAppearance.DietApp.Card.Title" parent="TextAppearance.DietApp.SectionTitle" />
+
+    <style name="TextAppearance.DietApp.Number" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

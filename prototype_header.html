@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DietApp - AI Coach Header 原型</title>
+  <script>p5.disableFriendlyErrors = true;</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.min.js"></script>
+  <style>
+    html, body { margin: 0; padding: 0; overflow: hidden; background: #F5F3ED; }
+    canvas { display: block; }
+    #label {
+      position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+      font-family: -apple-system, 'PingFang SC', sans-serif;
+      font-size: 13px; color: #8A9E8A; letter-spacing: 1px;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+<div id="label">轻食记 AI Header — 波浪呼吸效果原型</div>
+<script>
+// ═══════════════════════════════════════════════
+// DietApp CoachHeader Wave Effect Prototype
+// ═══════════════════════════════════════════════
+
+const CONFIG = {
+  // 头像
+  avatarSize: 72,
+  // 呼吸节奏 (ms)
+  breatheCycleOuter: 2400,
+  breatheCycleMid: 1800,
+  breatheCycleCore: 1600,
+  breatheCycleWave: 3000,
+  // 波浪
+  waveLayers: 3,
+  waveAmplitude: 8,
+  waveFrequency: 0.025,
+  waveSpeed: 0.0008,
+  // 浪花粒子
+  foamCount: 18,
+  foamSizeMin: 2,
+  foamSizeMax: 6,
+};
+
+// ═══ 调色板 ═══
+const PAL = {
+  bg:        [245, 243, 237],    // #F5F3ED Background
+  cardBg:    [255, 253, 248],    // #FFFDF8 CardBg
+  green:     [76, 175, 80],      // #4CAF50 Green
+  greenDark: [46, 125, 50],      // #2E7D32 GreenDark
+  greenLight:[200, 230, 201],    // #C8E6C9 GreenLight
+  greenBg:   [232, 245, 233],    // #E8F5E9 GreenBg
+  textPri:   [27, 46, 27],       // #1B2E1B
+  textSec:   [84, 110, 84],      // #546E54
+  white:     [255, 255, 255],
+};
+
+let canvasW, canvasH;
+let centerX, avatarY;
+let foamParticles = [];
+
+// ═══ Foam Particle ═══
+class FoamParticle {
+  constructor(cx, cy, baseRadius) {
+    this.reset(cx, cy, baseRadius);
+  }
+
+  reset(cx, cy, baseRadius) {
+    // 在波浪环附近随机位置
+    let angle = random(TWO_PI);
+    let r = baseRadius + random(-8, 20);
+    this.x = cx + cos(angle) * r;
+    this.y = cy + sin(angle) * r;
+    this.originX = this.x;
+    this.originY = this.y;
+    this.size = random(CONFIG.foamSizeMin, CONFIG.foamSizeMax);
+    this.alpha = random(80, 200);
+    this.alphaSpeed = random(0.003, 0.008);
+    this.drift = random(-0.3, 0.3);
+    this.phase = random(TWO_PI);
+    this.bobAmp = random(1.5, 4);
+    this.bobSpeed = random(0.002, 0.005);
+    this.life = 1.0;
+    this.decay = random(0.0005, 0.0015);
+  }
+
+  update(t) {
+    // 轻微漂移
+    this.x += this.drift;
+    // 上下浮动
+    this.y = this.originY + sin(t * this.bobSpeed + this.phase) * this.bobAmp;
+    // 透明度呼吸
+    this.life -= this.decay;
+    if (this.life <= 0) {
+      this.alpha = 0;
+    }
+  }
+
+  display() {
+    if (this.life <= 0) return;
+    let a = this.alpha * this.life;
+    noStroke();
+    fill(PAL.green[0], PAL.green[1], PAL.green[2], a);
+    circle(this.x, this.y, this.size);
+    // 高光点
+    fill(255, 255, 255, a * 0.6);
+    circle(this.x - this.size * 0.15, this.y - this.size * 0.15, this.size * 0.35);
+  }
+
+  isDead() { return this.life <= 0; }
+}
+
+// ═══ Setup ═══
+function setup() {
+  canvasW = min(windowWidth, 420);
+  canvasH = 200;
+  createCanvas(canvasW, canvasH);
+  pixelDensity(2);
+  centerX = canvasW / 2;
+  avatarY = canvasH / 2 - 10;
+
+  // 初始化浪花粒子
+  for (let i = 0; i < CONFIG.foamCount; i++) {
+    let p = new FoamParticle(centerX, avatarY, CONFIG.avatarSize * 0.7);
+    p.life = random(0.3, 1.0); // 错开初始生命
+    foamParticles.push(p);
+  }
+}
+
+// ═══ Draw ═══
+function draw() {
+  let t = millis();
+  background(PAL.bg[0], PAL.bg[1], PAL.bg[2]);
+
+  // ── 卡片背景 ──
+  drawCard();
+
+  // ── 波浪层（头像下方） ──
+  drawWaves(t);
+
+  // ── 呼吸光晕环 ──
+  drawBreathingRings(t);
+
+  // ── 头像本体 ──
+  drawAvatar(t);
+
+  // ── 浪花粒子 ──
+  updateAndDrawFoam(t);
+
+  // ── 文字信息 ──
+  drawTextInfo();
+
+  // ── 拍照按钮 ──
+  drawCameraButton();
+}
+
+// ═══ Card Background ═══
+function drawCard() {
+  let cardX = 12, cardY = 8;
+  let cardW = canvasW - 24, cardH = canvasH - 16;
+  noStroke();
+  fill(PAL.cardBg[0], PAL.cardBg[1], PAL.cardBg[2]);
+  rect(cardX, cardY, cardW, cardH, 16);
+  // 微妙阴影
+  drawingContext.shadowColor = 'rgba(0,0,0,0.06)';
+  drawingContext.shadowBlur = 8;
+  drawingContext.shadowOffsetY = 2;
+  rect(cardX, cardY, cardW, cardH, 16);
+  drawingContext.shadowColor = 'transparent';
+}
+
+// ═══ Breathing Rings ═══
+function drawBreathingRings(t) {
+  let cx = centerX, cy = avatarY;
+
+  // 外圈光晕 — alpha 呼吸
+  let outerAlpha = map(sin(t / CONFIG.breatheCycleOuter * TWO_PI), -1, 1, 0, 0.35);
+  noFill();
+  stroke(PAL.green[0], PAL.green[1], PAL.green[2], outerAlpha * 255);
+  strokeWeight(2);
+  circle(cx, cy, CONFIG.avatarSize * 1.5);
+
+  // 外圈填充光晕
+  noStroke();
+  fill(PAL.green[0], PAL.green[1], PAL.green[2], outerAlpha * 0.4 * 255);
+  circle(cx, cy, CONFIG.avatarSize * 1.5);
+
+  // 中间描边环 — 更强 alpha
+  let midAlpha = map(sin(t / CONFIG.breatheCycleMid * TWO_PI + 0.5), -1, 1, 0.05, 0.75);
+  noFill();
+  stroke(PAL.green[0], PAL.green[1], PAL.green[2], midAlpha * 255);
+  strokeWeight(2.5);
+  circle(cx, cy, CONFIG.avatarSize * 1.22);
+
+  // 核心光晕底色
+  let coreAlpha = map(sin(t / CONFIG.breatheCycleCore * TWO_PI + 1.0), -1, 1, 0.15, 0.5);
+  noStroke();
+  fill(PAL.greenDark[0], PAL.greenDark[1], PAL.greenDark[2], coreAlpha * 255);
+  circle(cx, cy, CONFIG.avatarSize * 1.05);
+}
+
+// ═══ Waves (Below Avatar) ═══
+function drawWaves(t) {
+  let cx = centerX;
+  let waveCenterY = avatarY + CONFIG.avatarSize * 0.55;
+  let baseRadius = CONFIG.avatarSize * 0.6;
+
+  for (let layer = 0; layer < CONFIG.waveLayers; layer++) {
+    let layerOffset = layer * 12;
+    let layerAlpha = map(layer, 0, CONFIG.waveLayers - 1, 0.45, 0.12);
+    let phaseOffset = layer * 0.8;
+    let timeOffset = layer * 400;
+    let cycleAlpha = map(
+      sin((t + timeOffset) / CONFIG.breatheCycleWave * TWO_PI + phaseOffset),
+      -1, 1, 0.2, 1.0
+    );
+    let finalAlpha = layerAlpha * cycleAlpha;
+
+    // 波浪路径
+    noFill();
+    stroke(PAL.green[0], PAL.green[1], PAL.green[2], finalAlpha * 255);
+    strokeWeight(2 - layer * 0.4);
+
+    beginShape();
+    // 从左侧画到右侧，只画下半圆 + 波浪
+    for (let angle = -PI * 0.15; angle <= PI * 1.15; angle += 0.04) {
+      let r = baseRadius + layerOffset;
+      // 波浪扰动
+      let wave = sin(angle * 3 + t * CONFIG.waveSpeed * 2 + phaseOffset) * CONFIG.waveAmplitude;
+      wave += sin(angle * 5 - t * CONFIG.waveSpeed * 3 + phaseOffset * 2) * CONFIG.waveAmplitude * 0.4;
+
+      let x = cx + cos(angle) * (r + wave);
+      let y = waveCenterY + sin(angle) * (r * 0.5 + wave * 0.6); // 压扁成椭圆
+
+      // 只画下半部分（波浪在下方）
+      if (y >= waveCenterY - 5) {
+        curveVertex(x, y);
+      }
+    }
+    endShape();
+
+    // 波浪泡沫线 — 更亮更细
+    stroke(PAL.greenLight[0], PAL.greenLight[1], PAL.greenLight[2], finalAlpha * 0.7 * 255);
+    strokeWeight(1);
+    beginShape();
+    for (let angle = -PI * 0.1; angle <= PI * 1.1; angle += 0.04) {
+      let r = baseRadius + layerOffset + 4;
+      let wave = sin(angle * 4 + t * CONFIG.waveSpeed * 2.5 + phaseOffset + 1) * CONFIG.waveAmplitude * 0.6;
+      wave += cos(angle * 6 - t * CONFIG.waveSpeed * 2 + phaseOffset) * CONFIG.waveAmplitude * 0.3;
+
+      let x = cx + cos(angle) * (r + wave);
+      let y = waveCenterY + sin(angle) * (r * 0.5 + wave * 0.6);
+
+      if (y >= waveCenterY - 5) {
+        curveVertex(x, y);
+      }
+    }
+    endShape();
+  }
+}
+
+// ═══ Avatar ═══
+function drawAvatar(t) {
+  let cx = centerX, cy = avatarY;
+  let scaleBreath = map(sin(t / CONFIG.breatheCycleCore * TWO_PI), -1, 1, 0.96, 1.04);
+
+  push();
+  translate(cx, cy);
+  scale(scaleBreath);
+
+  // 头像圆形背景
+  noStroke();
+  fill(PAL.greenLight[0], PAL.greenLight[1], PAL.greenLight[2]);
+  circle(0, 0, CONFIG.avatarSize);
+
+  // 模拟头像内容
+  fill(PAL.green[0], PAL.green[1], PAL.green[2], 60);
+  circle(0, 0, CONFIG.avatarSize * 0.7);
+  fill(PAL.greenDark[0], PAL.greenDark[1], PAL.greenDark[2]);
+  textSize(28);
+  textAlign(CENTER, CENTER);
+  text('🥗', 0, 0);
+
+  pop();
+}
+
+// ═══ Foam Particles ═══
+function updateAndDrawFoam(t) {
+  for (let p of foamParticles) {
+    p.update(t);
+    p.display();
+    if (p.isDead()) {
+      // 重生在波浪附近
+      let angle = random(TWO_PI);
+      let r = CONFIG.avatarSize * 0.65 + random(5, 25);
+      p.reset(centerX, avatarY + 5, r);
+    }
+  }
+}
+
+// ═══ Text Info ═══
+function drawTextInfo() {
+  let textX = centerX + CONFIG.avatarSize * 0.85;
+  let textY = avatarY - 14;
+
+  noStroke();
+  fill(PAL.textPri[0], PAL.textPri[1], PAL.textPri[2]);
+  textSize(16);
+  textStyle(BOLD);
+  textAlign(LEFT, CENTER);
+  text('轻食记 AI', textX, textY);
+
+  // Beta badge
+  let badgeX = textX + textWidth('轻食记 AI') + 6;
+  fill(PAL.green[0], PAL.green[1], PAL.green[2], 50);
+  rect(badgeX, textY - 7, 32, 14, 4);
+  fill(PAL.greenDark[0], PAL.greenDark[1], PAL.greenDark[2]);
+  textSize(8);
+  textStyle(BOLD);
+  text('Beta', badgeX + 4, textY);
+
+  // 副标题
+  fill(PAL.textSec[0], PAL.textSec[1], PAL.textSec[2]);
+  textSize(11);
+  textStyle(NORMAL);
+  text('你的专属饮食分析助手', textX, textY + 20);
+}
+
+// ═══ Camera Button ═══
+function drawCameraButton() {
+  let btnX = canvasW - 130;
+  let btnY = avatarY - 14;
+  let btnW = 105, btnH = 28;
+
+  // 按钮背景
+  noFill();
+  stroke(PAL.green[0], PAL.green[1], PAL.green[2], 80);
+  strokeWeight(1);
+  rect(btnX, btnY, btnW, btnH, 10);
+
+  // 图标 + 文字
+  noStroke();
+  fill(PAL.greenDark[0], PAL.greenDark[1], PAL.greenDark[2]);
+  textSize(11);
+  textAlign(CENTER, CENTER);
+  text('📷 拍照识别食物', btnX + btnW / 2, btnY + btnH / 2);
+}
+
+// ═══ Resize ═══
+function windowResized() {
+  canvasW = min(windowWidth, 420);
+  resizeCanvas(canvasW, canvasH);
+  centerX = canvasW / 2;
+}
+</script>
+</body>
+</html>

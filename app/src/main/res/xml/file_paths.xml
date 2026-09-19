@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- 与 requireContext().cacheDir 对应，拍照输出必须包含此项 -->
+    <cache-path name="internal_cache" path="." />
+    <external-cache-path name="external_cache" path="." />
+    <external-files-path name="external_files" path="." />
+</paths>

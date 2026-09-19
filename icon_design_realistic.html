@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>轻食记 Icon — 写实食物堆叠</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #1a1a2e;
+      font-family: -apple-system, 'PingFang SC', sans-serif;
+      padding: 40px 20px;
+      display: flex; flex-direction: column; align-items: center;
+      min-height: 100vh; color: #e0e0e0;
+    }
+    h1 { font-size: 22px; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 13px; color: #888; margin-bottom: 36px; text-align: center; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 28px; max-width: 1100px; width: 100%;
+    }
+    .card {
+      background: #16213e; border-radius: 20px; padding: 28px;
+      border: 1px solid #233;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .card h2 { font-size: 16px; margin-bottom: 4px; color: #fff; }
+    .card .desc { font-size: 12px; color: #888; margin-bottom: 18px; text-align: center; line-height: 1.6; }
+    .badge { display: inline-block; padding: 2px 8px; background: #0f3460; color: #53a8b6; font-size: 10px; font-weight: 700; border-radius: 6px; margin-bottom: 10px; }
+    canvas { border-radius: 22.5%; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+    .icon-wrap { position: relative; margin-bottom: 20px; }
+    .sizes { display: flex; gap: 10px; align-items: flex-end; }
+    .sizes canvas { border-radius: 22.5%; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    .size-label { text-align: center; color: #666; font-size: 9px; margin-top: 3px; }
+    .pick-btn {
+      margin-top: 14px; padding: 8px 24px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff; border: none; border-radius: 10px;
+      font-size: 13px; cursor: pointer; font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🍓 写实食物堆叠 — 两种背景</h1>
+<p class="subtitle">真实食物形状 + 质感高光 + 散落堆放，充满整个方形</p>
+
+<div class="grid">
+
+  <div class="card">
+    <span class="badge">H1 · 浅碗底</span>
+    <h2>暖白碗底</h2>
+    <p class="desc">浅色碗底衬托，食物颜色更鲜艳<br>适合浅色主题的 app</p>
+    <div class="icon-wrap"><canvas id="icon1" width="512" height="512"></canvas></div>
+    <div class="sizes">
+      <div><canvas id="icon1_48" width="48" height="48"></canvas><div class="size-label">48dp</div></div>
+      <div><canvas id="icon1_72" width="72" height="72"></canvas><div class="size-label">72dp</div></div>
+      <div><canvas id="icon1_96" width="96" height="96"></canvas><div class="size-label">96dp</div></div>
+      <div><canvas id="icon1_128" width="128" height="128"></canvas><div class="size-label">128dp</div></div>
+    </div>
+    <button class="pick-btn" onclick="pick('H1')">选择 H1</button>
+  </div>
+
+  <div class="card">
+    <span class="badge">H2 · 深木底</span>
+    <h2>深色木纹底</h2>
+    <p class="desc">深色背景让食物像宝石一样发光<br>更有高级感和食欲感</p>
+    <div class="icon-wrap"><canvas id="icon2" width="512" height="512"></canvas></div>
+    <div class="sizes">
+      <div><canvas id="icon2_48" width="48" height="48"></canvas><div class="size-label">48dp</div></div>
+      <div><canvas id="icon2_72" width="72" height="72"></canvas><div class="size-label">72dp</div></div>
+      <div><canvas id="icon2_96" width="96" height="96"></canvas><div class="size-label">96dp</div></div>
+      <div><canvas id="icon2_128" width="128" height="128"></canvas><div class="size-label">128dp</div></div>
+    </div>
+    <button class="pick-btn" onclick="pick('H2')">选择 H2</button>
+  </div>
+
+</div>
+
+<script>
+const S = 512; // 画布尺寸
+
+function rr(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y);
+  ctx.arcTo(x+w,y,x+w,y+r,r); ctx.lineTo(x+w,y+h-r);
+  ctx.arcTo(x+w,y+h,x+w-r,y+h,r); ctx.lineTo(x+r,y+h);
+  ctx.arcTo(x,y+h,x,y+h-r,r); ctx.lineTo(x,y+r);
+  ctx.arcTo(x,y,x+r,y,r); ctx.closePath();
+}
+
+// ═══ 写实食物绘制函数 ═══
+
+function drawStrawberry(ctx, x, y, size, angle) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+
+  // 阴影
+  ctx.fillStyle = 'rgba(0,0,0,0.15)';
+  ctx.beginPath();
+  ctx.ellipse(2, size*0.05, size*0.35, size*0.12, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 身体
+  const bodyGrad = ctx.createLinearGradient(-size*0.3, -size*0.4, size*0.3, size*0.4);
+  bodyGrad.addColorStop(0, '#ff4757');
+  bodyGrad.addColorStop(0.4, '#e8354a');
+  bodyGrad.addColorStop(1, '#c0392b');
+  ctx.fillStyle = bodyGrad;
+  ctx.beginPath();
+  ctx.moveTo(0, -size*0.38);
+  ctx.bezierCurveTo(-size*0.35, -size*0.2, -size*0.3, size*0.15, -size*0.08, size*0.4);
+  ctx.bezierCurveTo(-size*0.02, size*0.44, size*0.02, size*0.44, size*0.08, size*0.4);
+  ctx.bezierCurveTo(size*0.3, size*0.15, size*0.35, -size*0.2, 0, -size*0.38);
+  ctx.fill();
+
+  // 种子
+  ctx.fillStyle = '#f9ca24';
+  const seeds = [[-0.1,-0.1],[0.12,-0.05],[-0.05,0.12],[0.1,0.15],[0,0.25],[-0.15,0.05],[0.15,0.05],[-0.08,-0.22],[0.08,-0.2]];
+  seeds.forEach(([dx,dy]) => {
+    ctx.beginPath();
+    ctx.ellipse(dx*size, dy*size, size*0.02, size*0.03, Math.random()*0.5, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  // 高光
+  ctx.fillStyle = 'rgba(255,255,255,0.25)';
+  ctx.beginPath();
+  ctx.ellipse(-size*0.08, -size*0.15, size*0.06, size*0.12, -0.3, 0, Math.PI*2);
+  ctx.fill();
+
+  // 叶子
+  ctx.fillStyle = '#27ae60';
+  ctx.beginPath();
+  ctx.moveTo(0, -size*0.38);
+  ctx.bezierCurveTo(-size*0.15, -size*0.5, -size*0.25, -size*0.42, -size*0.12, -size*0.35);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(0, -size*0.38);
+  ctx.bezierCurveTo(size*0.15, -size*0.5, size*0.25, -size*0.42, size*0.12, -size*0.35);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(0, -size*0.38);
+  ctx.bezierCurveTo(0, -size*0.55, size*0.05, -size*0.48, size*0.02, -size*0.38);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function drawOrangeSlice(ctx, x, y, size, angle) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+
+  // 阴影
+  ctx.fillStyle = 'rgba(0,0,0,0.12)';
+  ctx.beginPath();
+  ctx.ellipse(2, 3, size*0.42, size*0.42, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 外皮
+  const r = size * 0.4;
+  ctx.fillStyle = '#f39c12';
+  ctx.beginPath();
+  ctx.arc(0, 0, r, 0, Math.PI*2);
+  ctx.fill();
+
+  // 白瓤
+  ctx.fillStyle = '#ffeaa7';
+  ctx.beginPath();
+  ctx.arc(0, 0, r * 0.88, 0, Math.PI*2);
+  ctx.fill();
+
+  // 果肉渐变
+  const fleshGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, r*0.82);
+  fleshGrad.addColorStop(0, '#fdcb6e');
+  fleshGrad.addColorStop(0.6, '#f39c12');
+  fleshGrad.addColorStop(1, '#e67e22');
+  ctx.fillStyle = fleshGrad;
+  ctx.beginPath();
+  ctx.arc(0, 0, r * 0.82, 0, Math.PI*2);
+  ctx.fill();
+
+  // 瓣线
+  ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+  ctx.lineWidth = size * 0.015;
+  for (let i = 0; i < 8; i++) {
+    const a = i * Math.PI / 4;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(Math.cos(a)*r*0.78, Math.sin(a)*r*0.78);
+    ctx.stroke();
+  }
+
+  // 中心
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.beginPath();
+  ctx.arc(0, 0, size*0.06, 0, Math.PI*2);
+  ctx.fill();
+
+  // 高光
+  ctx.fillStyle = 'rgba(255,255,255,0.2)';
+  ctx.beginPath();
+  ctx.ellipse(-size*0.1, -size*0.1, size*0.12, size*0.08, -0.5, 0, Math.PI*2);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function drawBlueberry(ctx, x, y, size, angle) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+
+  const r = size * 0.22;
+
+  // 阴影
+  ctx.fillStyle = 'rgba(0,0,0,0.2)';
+  ctx.beginPath();
+  ctx.ellipse(1, 2, r*1.1, r*0.4, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 身体
+  const grad = ctx.createRadialGradient(-r*0.3, -r*0.3, 0, 0, 0, r);
+  grad.addColorStop(0, '#74b9ff');
+  grad.addColorStop(0.3, '#5f7dc5');
+  grad.addColorStop(0.7, '#3742a6');
+  grad.addColorStop(1, '#2c3e7a');
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.arc(0, 0, r, 0, Math.PI*2);
+  ctx.fill();
+
+  // 表面霜粉
+  ctx.fillStyle = 'rgba(180,200,230,0.3)';
+  ctx.beginPath();
+  ctx.arc(r*0.1, -r*0.1, r*0.7, 0, Math.PI*2);
+  ctx.fill();
+
+  // 顶部星形萼片
+  ctx.fillStyle = '#2c3e50';
+  for (let i = 0; i < 5; i++) {
+    const a = i * Math.PI * 2 / 5 - Math.PI/2;
+    ctx.beginPath();
+    ctx.moveTo(0, -r*0.15);
+    ctx.lineTo(Math.cos(a)*r*0.18, -r*0.15 + Math.sin(a)*r*0.18);
+    ctx.lineTo(Math.cos(a+0.6)*r*0.08, -r*0.15 + Math.sin(a+0.6)*r*0.08);
+    ctx.fill();
+  }
+
+  // 高光
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.beginPath();
+  ctx.ellipse(-r*0.25, -r*0.3, r*0.15, r*0.1, -0.5, 0, Math.PI*2);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function drawGrape(ctx, x, y, size, angle) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+
+  const r = size * 0.1;
+  const pts = [
+    [0, -r*1.8], [-r*1.1, -r*0.6], [r*1.1, -r*0.6],
+    [-r*1.6, r*0.6], [0, r*0.4], [r*1.6, r*0.6],
+    [-r*0.8, r*1.6], [r*0.8, r*1.6], [0, r*2.2]
+  ];
+
+  // 阴影
+  ctx.fillStyle = 'rgba(0,0,0,0.12)';
+  pts.forEach(([dx,dy]) => {
+    ctx.beginPath();
+    ctx.ellipse(dx+1, dy+2, r*0.95, r*0.95, 0, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  // 葡萄粒
+  pts.forEach(([dx,dy]) => {
+    const grad = ctx.createRadialGradient(dx-r*0.3, dy-r*0.3, 0, dx, dy, r);
+    grad.addColorStop(0, '#a29bfe');
+    grad.addColorStop(0.5, '#8067c9');
+    grad.addColorStop(1, '#5b3f8f');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(dx, dy, r*0.88, 0, Math.PI*2);
+    ctx.fill();
+
+    // 高光
+    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    ctx.beginPath();
+    ctx.ellipse(dx-r*0.2, dy-r*0.25, r*0.25, r*0.15, -0.4, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  // 茎
+  ctx.strokeStyle = '#556b2f';
+  ctx.lineWidth = size * 0.02;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(0, -r*2.5);
+  ctx.quadraticCurveTo(r*0.3, -r*2, 0, -r*1.8);
+  ctx.stroke();
+
+  // 小叶子
+  ctx.fillStyle = '#6ab04c';
+  ctx.beginPath();
+  ctx.moveTo(0, -r*2.5);
+  ctx.bezierCurveTo(r*0.5, -r*3.2, r*1, -r*2.5, r*0.4, -r*2.2);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function drawKiwiSlice(ctx, x, y, size, angle) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+
+  const r = size * 0.32;
+
+  // 阴影
+  ctx.fillStyle = 'rgba(0,0,0,0.12)';
+  ctx.beginPath();
+  ctx.ellipse(2, 3, r*1.05, r*0.4, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 外皮（棕色毛感）
+  ctx.fillStyle = '#8B7355';
+  ctx.beginPath();
+  ctx.ellipse(0, 0, r, r*0.95, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 白色内层
+  ctx.fillStyle = '#f5f5dc';
+  ctx.beginPath();
+  ctx.ellipse(0, 0, r*0.88, r*0.83, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 绿色果肉
+  const fleshGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, r*0.8);
+  fleshGrad.addColorStop(0, '#b8e994');
+  fleshGrad.addColorStop(0.6, '#78e08f');
+  fleshGrad.addColorStop(1, '#38ada9');
+  ctx.fillStyle = fleshGrad;
+  ctx.beginPath();
+  ctx.ellipse(0, 0, r*0.8, r*0.75, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 中心白色心
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.beginPath();
+  ctx.ellipse(0, 0, r*0.15, r*0.5, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 籽 — 放射排列
+  ctx.fillStyle = '#2c2c2c';
+  for (let i = 0; i < 12; i++) {
+    const a = i * Math.PI / 6;
+    const dr = r * 0.45;
+    ctx.beginPath();
+    ctx.ellipse(Math.cos(a)*dr, Math.sin(a)*dr, r*0.03, r*0.06, a, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  // 高光
+  ctx.fillStyle = 'rgba(255,255,255,0.18)';
+  ctx.beginPath();
+  ctx.ellipse(-r*0.2, -r*0.2, r*0.25, r*0.15, -0.5, 0, Math.PI*2);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function drawLemonSlice(ctx, x, y, size, angle) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+
+  const r = size * 0.28;
+
+  // 阴影
+  ctx.fillStyle = 'rgba(0,0,0,0.1)';
+  ctx.beginPath();
+  ctx.ellipse(2, 3, r*1.05, r*0.4, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 外皮
+  ctx.fillStyle = '#f9ca24';
+  ctx.beginPath();
+  ctx.ellipse(0, 0, r, r*0.92, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 白瓤
+  ctx.fillStyle = '#fff9c4';
+  ctx.beginPath();
+  ctx.ellipse(0, 0, r*0.85, r*0.78, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 果肉
+  const fleshGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, r*0.78);
+  fleshGrad.addColorStop(0, '#fff176');
+  fleshGrad.addColorStop(0.7, '#ffee58');
+  fleshGrad.addColorStop(1, '#fdd835');
+  ctx.fillStyle = fleshGrad;
+  ctx.beginPath();
+  ctx.ellipse(0, 0, r*0.78, r*0.7, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 瓣线
+  ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+  ctx.lineWidth = size * 0.01;
+  for (let i = 0; i < 10; i++) {
+    const a = i * Math.PI / 5;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(Math.cos(a)*r*0.72, Math.sin(a)*r*0.66);
+    ctx.stroke();
+  }
+
+  // 高光
+  ctx.fillStyle = 'rgba(255,255,255,0.25)';
+  ctx.beginPath();
+  ctx.ellipse(-r*0.15, -r*0.15, r*0.2, r*0.12, -0.4, 0, Math.PI*2);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function drawEgg(ctx, x, y, size, angle) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+
+  const r = size * 0.28;
+
+  // 阴影
+  ctx.fillStyle = 'rgba(0,0,0,0.12)';
+  ctx.beginPath();
+  ctx.ellipse(2, 3, r*0.8, r*0.35, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 蛋白
+  const whiteGrad = ctx.createRadialGradient(-r*0.1, -r*0.1, 0, 0, 0, r);
+  whiteGrad.addColorStop(0, '#ffffff');
+  whiteGrad.addColorStop(0.7, '#f5f5f0');
+  whiteGrad.addColorStop(1, '#e8e0d4');
+  ctx.fillStyle = whiteGrad;
+  ctx.beginPath();
+  ctx.ellipse(0, 0, r, r*0.85, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 蛋黄
+  const yolkGrad = ctx.createRadialGradient(-r*0.05, -r*0.05, 0, 0, 0, r*0.4);
+  yolkGrad.addColorStop(0, '#ffeaa7');
+  yolkGrad.addColorStop(0.4, '#fdcb6e');
+  yolkGrad.addColorStop(1, '#f39c12');
+  ctx.fillStyle = yolkGrad;
+  ctx.beginPath();
+  ctx.arc(0, 0, r*0.38, 0, Math.PI*2);
+  ctx.fill();
+
+  // 蛋黄高光
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.beginPath();
+  ctx.ellipse(-r*0.1, -r*0.1, r*0.12, r*0.08, -0.3, 0, Math.PI*2);
+  ctx.fill();
+
+  // 蛋白高光
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.beginPath();
+  ctx.ellipse(-r*0.25, -r*0.25, r*0.18, r*0.1, -0.5, 0, Math.PI*2);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+// ═══ 食物数据：位置、大小、角度（手动摆放，模拟散落感） ═══
+const foods = [
+  // 草莓 — 左上偏中
+  { draw: drawStrawberry, x: 0.22, y: 0.28, size: 0.26, angle: -0.15 },
+  // 橙子片 — 右中
+  { draw: drawOrangeSlice, x: 0.72, y: 0.42, size: 0.24, angle: 0.1 },
+  // 蓝莓散落 3 颗
+  { draw: drawBlueberry, x: 0.45, y: 0.2,  size: 0.18, angle: 0 },
+  { draw: drawBlueberry, x: 0.58, y: 0.65, size: 0.16, angle: 0.2 },
+  { draw: drawBlueberry, x: 0.35, y: 0.72, size: 0.14, angle: -0.1 },
+  // 葡萄串 — 左下
+  { draw: drawGrape, x: 0.25, y: 0.62, size: 0.22, angle: 0.08 },
+  // 猕猴桃片 — 右上
+  { draw: drawKiwiSlice, x: 0.7, y: 0.18, size: 0.22, angle: -0.2 },
+  // 柠檬片 — 中下偏右
+  { draw: drawLemonSlice, x: 0.55, y: 0.45, size: 0.2, angle: 0.3 },
+  // 鸡蛋 — 左中
+  { draw: drawEgg, x: 0.38, y: 0.45, size: 0.2, angle: -0.1 },
+];
+
+// ═══ 绘制主图 ═══
+function drawMain(ctx, s, darkBg) {
+  // 背景
+  if (darkBg) {
+    const bg = ctx.createLinearGradient(0, 0, s, s);
+    bg.addColorStop(0, '#2d2d2d');
+    bg.addColorStop(0.5, '#1a1a1a');
+    bg.addColorStop(1, '#252525');
+    ctx.fillStyle = bg;
+  } else {
+    ctx.fillStyle = '#f5f0e8';
+  }
+  rr(ctx, 0, 0, s, s, s * 0.22);
+  ctx.fill();
+
+  // 碗底凹陷感
+  const bowlGrad = ctx.createRadialGradient(s/2, s/2, 0, s/2, s/2, s*0.45);
+  if (darkBg) {
+    bowlGrad.addColorStop(0, 'rgba(50,50,50,0.6)');
+    bowlGrad.addColorStop(1, 'rgba(20,20,20,0)');
+  } else {
+    bowlGrad.addColorStop(0, 'rgba(0,0,0,0.03)');
+    bowlGrad.addColorStop(1, 'rgba(0,0,0,0)');
+  }
+  ctx.fillStyle = bowlGrad;
+  rr(ctx, 0, 0, s, s, s * 0.22);
+  ctx.fill();
+
+  // 裁剪到圆角方形
+  ctx.save();
+  rr(ctx, 0, 0, s, s, s * 0.22);
+  ctx.clip();
+
+  // 按层绘制食物（底层先画，上层后画）
+  // 排序：y 越大越先画（远处先画），但同 y 时随机
+  const sorted = [...foods].sort((a, b) => a.y - b.y);
+
+  sorted.forEach(f => {
+    f.draw(ctx, f.x * s, f.y * s, s * f.size, f.angle);
+  });
+
+  ctx.restore();
+
+  // 边缘微妙的内阴影
+  const innerShadow = ctx.createRadialGradient(s/2, s/2, s*0.3, s/2, s/2, s*0.55);
+  innerShadow.addColorStop(0, 'rgba(0,0,0,0)');
+  innerShadow.addColorStop(1, darkBg ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.08)');
+  ctx.fillStyle = innerShadow;
+  rr(ctx, 0, 0, s, s, s * 0.22);
+  ctx.fill();
+}
+
+function drawLight(ctx, s) { drawMain(ctx, s, false); }
+function drawDark(ctx, s) { drawMain(ctx, s, true); }
+
+// ═══ 渲染 ═══
+function render() {
+  [
+    ['icon1', drawLight], ['icon1_48', drawLight], ['icon1_72', drawLight],
+    ['icon1_96', drawLight], ['icon1_128', drawLight],
+    ['icon2', drawDark], ['icon2_48', drawDark], ['icon2_72', drawDark],
+    ['icon2_96', drawDark], ['icon2_128', drawDark],
+  ].forEach(([id, fn]) => {
+    const c = document.getElementById(id);
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    ctx.clearRect(0, 0, c.width, c.height);
+    fn(ctx, c.width);
+  });
+}
+
+function pick(v) { alert('已选择 ' + v + '！'); }
+render();
+</script>
+</body>
+</html>

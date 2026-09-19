@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 数据看板图标：柱状图上升趋势 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path android:fillColor="#5BBD72"
+        android:pathData="M5,19h14v2H5z"/>
+    <path android:fillColor="#5BBD72"
+        android:pathData="M7,14h2v5H7z"/>
+    <path android:fillColor="#FF6B35"
+        android:pathData="M11,10h2v9h-2z"/>
+    <path android:fillColor="#2EC4B6"
+        android:pathData="M15,7h2v12h-2z"/>
+</vector>

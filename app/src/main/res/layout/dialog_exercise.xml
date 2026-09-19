@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/page_padding_h"
+    android:orientation="vertical"
+    android:background="@drawable/bg_dialog_rounded">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="记录运动"
+        android:textAppearance="@style/TextAppearance.DietApp.SectionTitle"
+        android:layout_marginBottom="@dimen/space_lg" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.DietApp.TextInput.Dropdown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="运动类型">
+
+        <AutoCompleteTextView
+            android:id="@+id/et_exercise_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:textSize="16sp"
+            android:minHeight="@dimen/input_height" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.DietApp.TextInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_md"
+        android:hint="运动时长"
+        app:suffixText="分钟">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_exercise_duration"
+            style="@style/Widget.DietApp.TextInputEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>

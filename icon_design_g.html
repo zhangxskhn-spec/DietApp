@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>轻食记 Icon — 方案 G 优化</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #1a1a2e;
+      font-family: -apple-system, 'PingFang SC', sans-serif;
+      padding: 40px 20px;
+      display: flex; flex-direction: column; align-items: center;
+      min-height: 100vh; color: #e0e0e0;
+    }
+    h1 { font-size: 22px; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 13px; color: #888; margin-bottom: 36px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px; max-width: 1000px; width: 100%;
+    }
+    .card {
+      background: #16213e; border-radius: 20px; padding: 28px;
+      border: 1px solid #233;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .card h2 { font-size: 16px; margin-bottom: 4px; color: #fff; }
+    .card .desc { font-size: 12px; color: #888; margin-bottom: 18px; text-align: center; line-height: 1.6; }
+    .badge { display: inline-block; padding: 2px 8px; background: #0f3460; color: #53a8b6; font-size: 10px; font-weight: 700; border-radius: 6px; margin-bottom: 10px; }
+    canvas { border-radius: 22.5%; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+    .icon-wrap { position: relative; margin-bottom: 20px; }
+    .sizes { display: flex; gap: 10px; align-items: flex-end; }
+    .sizes canvas { border-radius: 22.5%; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    .size-label { text-align: center; color: #666; font-size: 9px; margin-top: 3px; }
+    .pick-btn {
+      margin-top: 14px; padding: 8px 24px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff; border: none; border-radius: 10px;
+      font-size: 13px; cursor: pointer; font-weight: 600;
+    }
+    .pick-btn:hover { transform: scale(1.04); }
+    .legend {
+      margin-top: 16px; display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 6px; width: 100%;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; color: #aaa;
+    }
+    .legend-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🫐 方案 G — 像素营养 · 细节优化</h1>
+<p class="subtitle">每个圆点内嵌微型食物图标，辨识度 × 记忆点</p>
+
+<div class="grid">
+
+  <!-- G1: 细线条食物图标 -->
+  <div class="card">
+    <span class="badge">G1 · 细线条</span>
+    <h2>白色线条食物</h2>
+    <p class="desc">每个彩色圆点内用白色细线勾勒食物轮廓<br>精致、克制、远看是点阵近看有惊喜</p>
+    <div class="icon-wrap"><canvas id="iconG1" width="256" height="256"></canvas></div>
+    <div class="sizes">
+      <div><canvas id="iconG1_48" width="48" height="48"></canvas><div class="size-label">48dp</div></div>
+      <div><canvas id="iconG1_72" width="72" height="72"></canvas><div class="size-label">72dp</div></div>
+      <div><canvas id="iconG1_96" width="96" height="96"></canvas><div class="size-label">96dp</div></div>
+      <div><canvas id="iconG1_128" width="128" height="128"></canvas><div class="size-label">128dp</div></div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#FF6B6B"></div>🍒 樱桃</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#FFA94D"></div>🍊 橙子</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#FFD43B"></div>🍋 柠檬</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#69DB7C"></div>🥬 生菜</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#4CAF50"></div>🫑 青椒</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#38D9A9"></div>🥝 猕猴桃</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#74C0FC"></div>🫐 蓝莓</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#5C7CFA"></div>🥚 鸡蛋</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#B197FC"></div>🍇 葡萄</div>
+    </div>
+    <button class="pick-btn" onclick="pick('G1')">选择 G1</button>
+  </div>
+
+  <!-- G2: 填充剪影 -->
+  <div class="card">
+    <span class="badge">G2 · 剪影填充</span>
+    <h2>白色食物剪影</h2>
+    <p class="desc">白色实心食物剪影，更醒目<br>小尺寸也能看清，适合手机桌面</p>
+    <div class="icon-wrap"><canvas id="iconG2" width="256" height="256"></canvas></div>
+    <div class="sizes">
+      <div><canvas id="iconG2_48" width="48" height="48"></canvas><div class="size-label">48dp</div></div>
+      <div><canvas id="iconG2_72" width="72" height="72"></canvas><div class="size-label">72dp</div></div>
+      <div><canvas id="iconG2_96" width="96" height="96"></canvas><div class="size-label">96dp</div></div>
+      <div><canvas id="iconG2_128" width="128" height="128"></canvas><div class="size-label">128dp</div></div>
+    </div>
+    <button class="pick-btn" onclick="pick('G2')">选择 G2</button>
+  </div>
+
+  <!-- G3: 凹陷浮雕 -->
+  <div class="card">
+    <span class="badge">G3 · 浮雕凹陷</span>
+    <h2>深色凹陷图案</h2>
+    <p class="desc">食物图案用同色系深色凹陷呈现<br>立体感强，像糖果表面的压纹</p>
+    <div class="icon-wrap"><canvas id="iconG3" width="256" height="256"></canvas></div>
+    <div class="sizes">
+      <div><canvas id="iconG3_48" width="48" height="48"></canvas><div class="size-label">48dp</div></div>
+      <div><canvas id="iconG3_72" width="72" height="72"></canvas><div class="size-label">72dp</div></div>
+      <div><canvas id="iconG3_96" width="96" height="96"></canvas><div class="size-label">96dp</div></div>
+      <div><canvas id="iconG3_128" width="128" height="128"></canvas><div class="size-label">128dp</div></div>
+    </div>
+    <button class="pick-btn" onclick="pick('G3')">选择 G3</button>
+  </div>
+
+</div>
+
+<script>
+function rr(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r, y); ctx.lineTo(x+w-r, y);
+  ctx.arcTo(x+w, y, x+w, y+r, r); ctx.lineTo(x+w, y+h-r);
+  ctx.arcTo(x+w, y+h, x+w-r, y+h, r); ctx.lineTo(x+r, y+h);
+  ctx.arcTo(x, y+h, x, y+h-r, r); ctx.lineTo(x, y+r);
+  ctx.arcTo(x, y, x+r, y, r); ctx.closePath();
+}
+
+// 食物绘制函数 — 微型图标
+// type: 'line'=细线, 'fill'=填充, 'emboss'=凹陷
+function drawFood(ctx, cx, cy, r, food, type, embossColor) {
+  const s = r * 0.55; // 图标绘制区域
+  ctx.save();
+  ctx.translate(cx, cy);
+
+  if (type === 'line') {
+    ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+    ctx.lineWidth = r * 0.08;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+  } else if (type === 'fill') {
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+  } else if (type === 'emboss') {
+    ctx.fillStyle = embossColor || 'rgba(0,0,0,0.2)';
+  }
+
+  switch (food) {
+    case 'cherry': // 🍒 樱桃
+      if (type === 'line') {
+        // 两个圆 + 茎
+        ctx.beginPath(); ctx.arc(-s*0.25, s*0.15, s*0.35, 0, Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.arc(s*0.25, s*0.1, s*0.3, 0, Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(-s*0.25, -s*0.2); ctx.quadraticCurveTo(0, -s*0.6, s*0.1, -s*0.5); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(s*0.25, -s*0.19); ctx.quadraticCurveTo(s*0.1, -s*0.5, s*0.1, -s*0.5); ctx.stroke();
+      } else {
+        ctx.beginPath(); ctx.arc(-s*0.2, s*0.15, s*0.32, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(s*0.2, s*0.1, s*0.28, 0, Math.PI*2); ctx.fill();
+        ctx.strokeStyle = ctx.fillStyle; ctx.lineWidth = r*0.07; ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.moveTo(-s*0.2, -s*0.15); ctx.quadraticCurveTo(0, -s*0.55, s*0.1, -s*0.5); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(s*0.2, -s*0.17); ctx.quadraticCurveTo(s*0.1, -s*0.5, s*0.1, -s*0.5); ctx.stroke();
+      }
+      break;
+
+    case 'orange': // 🍊 橙子切片
+      if (type === 'line') {
+        ctx.beginPath(); ctx.arc(0, 0, s*0.4, 0, Math.PI*2); ctx.stroke();
+        // 瓣
+        for (let i = 0; i < 6; i++) {
+          const a = i * Math.PI / 3;
+          ctx.beginPath(); ctx.moveTo(0, 0);
+          ctx.lineTo(Math.cos(a)*s*0.35, Math.sin(a)*s*0.35); ctx.stroke();
+        }
+      } else {
+        ctx.beginPath(); ctx.arc(0, 0, s*0.42, 0, Math.PI*2); ctx.fill();
+        // 切出三角缺口表示切片
+        if (type === 'emboss') {
+          ctx.save(); ctx.globalCompositeOperation = 'destination-out';
+          ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(s*0.42, 0);
+          ctx.arc(0, 0, s*0.42, 0, Math.PI/6); ctx.closePath(); ctx.fill();
+          ctx.restore();
+        }
+      }
+      break;
+
+    case 'lemon': // 🍋 柠檬
+      if (type === 'line') {
+        ctx.beginPath();
+        ctx.ellipse(0, 0, s*0.45, s*0.3, 0, 0, Math.PI*2); ctx.stroke();
+        // 小叶子
+        ctx.beginPath();
+        ctx.moveTo(s*0.35, -s*0.15);
+        ctx.quadraticCurveTo(s*0.55, -s*0.4, s*0.45, -s*0.35);
+        ctx.quadraticCurveTo(s*0.5, -s*0.2, s*0.35, -s*0.15); ctx.stroke();
+      } else {
+        ctx.beginPath();
+        ctx.ellipse(0, 0, s*0.42, s*0.28, 0, 0, Math.PI*2); ctx.fill();
+      }
+      break;
+
+    case 'lettuce': // 🥬 生菜叶
+      if (type === 'line') {
+        ctx.beginPath();
+        ctx.moveTo(0, s*0.4);
+        ctx.bezierCurveTo(-s*0.5, s*0.1, -s*0.4, -s*0.4, 0, -s*0.35);
+        ctx.bezierCurveTo(s*0.4, -s*0.4, s*0.5, s*0.1, 0, s*0.4);
+        ctx.stroke();
+        // 叶脉
+        ctx.beginPath(); ctx.moveTo(0, s*0.35); ctx.lineTo(0, -s*0.3); ctx.stroke();
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(0, s*0.38);
+        ctx.bezierCurveTo(-s*0.48, s*0.1, -s*0.38, -s*0.38, 0, -s*0.32);
+        ctx.bezierCurveTo(s*0.38, -s*0.38, s*0.48, s*0.1, 0, s*0.38);
+        ctx.fill();
+      }
+      break;
+
+    case 'pepper': // 🫑 青椒
+      if (type === 'line') {
+        ctx.beginPath();
+        ctx.moveTo(0, -s*0.4);
+        ctx.bezierCurveTo(-s*0.4, -s*0.2, -s*0.35, s*0.25, 0, s*0.35);
+        ctx.bezierCurveTo(s*0.35, s*0.25, s*0.4, -s*0.2, 0, -s*0.4);
+        ctx.stroke();
+        // 茎
+        ctx.beginPath(); ctx.moveTo(0, -s*0.4); ctx.lineTo(0, -s*0.55); ctx.stroke();
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(0, -s*0.38);
+        ctx.bezierCurveTo(-s*0.38, -s*0.18, -s*0.33, s*0.22, 0, s*0.32);
+        ctx.bezierCurveTo(s*0.33, s*0.22, s*0.38, -s*0.18, 0, -s*0.38);
+        ctx.fill();
+      }
+      break;
+
+    case 'kiwi': // 🥝 猕猴桃切片
+      if (type === 'line') {
+        ctx.beginPath(); ctx.ellipse(0, 0, s*0.4, s*0.35, 0, 0, Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.ellipse(0, 0, s*0.25, s*0.2, 0, 0, Math.PI*2); ctx.stroke();
+        // 籽
+        for (let i = 0; i < 5; i++) {
+          const a = i * Math.PI * 2 / 5;
+          ctx.beginPath();
+          ctx.arc(Math.cos(a)*s*0.15, Math.sin(a)*s*0.12, s*0.04, 0, Math.PI*2);
+          ctx.stroke();
+        }
+      } else {
+        ctx.beginPath(); ctx.ellipse(0, 0, s*0.4, s*0.34, 0, 0, Math.PI*2); ctx.fill();
+      }
+      break;
+
+    case 'blueberry': // 🫐 蓝莓
+      if (type === 'line') {
+        ctx.beginPath(); ctx.arc(0, 0, s*0.38, 0, Math.PI*2); ctx.stroke();
+        // 顶部星形
+        for (let i = 0; i < 5; i++) {
+          const a = i * Math.PI * 2 / 5 - Math.PI/2;
+          ctx.beginPath();
+          ctx.moveTo(0, -s*0.15);
+          ctx.lineTo(Math.cos(a)*s*0.12, -s*0.15 + Math.sin(a)*s*0.12);
+          ctx.stroke();
+        }
+      } else {
+        ctx.beginPath(); ctx.arc(0, 0, s*0.38, 0, Math.PI*2); ctx.fill();
+      }
+      break;
+
+    case 'egg': // 🥚 鸡蛋
+      if (type === 'line') {
+        ctx.beginPath();
+        ctx.ellipse(0, s*0.02, s*0.3, s*0.4, 0, 0, Math.PI*2); ctx.stroke();
+      } else {
+        ctx.beginPath();
+        ctx.ellipse(0, s*0.02, s*0.28, s*0.38, 0, 0, Math.PI*2); ctx.fill();
+      }
+      break;
+
+    case 'grape': // 🍇 葡萄
+      if (type === 'line') {
+        const pts = [[0,-s*0.2],[-s*0.2,0],[s*0.2,0],[-s*0.1,s*0.2],[s*0.1,s*0.2],[0,s*0.35]];
+        pts.forEach(([x,y]) => {
+          ctx.beginPath(); ctx.arc(x, y, s*0.14, 0, Math.PI*2); ctx.stroke();
+        });
+        // 茎
+        ctx.beginPath(); ctx.moveTo(0, -s*0.35); ctx.lineTo(0, -s*0.5); ctx.stroke();
+      } else {
+        const pts = [[0,-s*0.18],[-s*0.18,s*0.02],[s*0.18,s*0.02],[-s*0.09,s*0.22],[s*0.09,s*0.22],[0,s*0.35]];
+        pts.forEach(([x,y]) => {
+          ctx.beginPath(); ctx.arc(x, y, s*0.13, 0, Math.PI*2); ctx.fill();
+        });
+      }
+      break;
+  }
+
+  ctx.restore();
+}
+
+// ═══ 通用绘制 ═══
+function drawPixelIcon(ctx, s, type, embossColors) {
+  // 背景
+  if (type === 'emboss') {
+    ctx.fillStyle = '#e8e0d4';
+  } else {
+    ctx.fillStyle = '#f0ece4';
+  }
+  rr(ctx, 0, 0, s, s, s * 0.22);
+  ctx.fill();
+
+  const cx = s/2, cy = s/2;
+  const gap = s * 0.19;
+  const r = s * 0.055;
+
+  const colors = ['#FF6B6B','#FFA94D','#FFD43B','#69DB7C','#4CAF50','#38D9A9','#74C0FC','#5C7CFA','#B197FC'];
+  const foods = ['cherry','orange','lemon','lettuce','pepper','kiwi','blueberry','egg','grape'];
+
+  let i = 0;
+  for (let row = -1; row <= 1; row++) {
+    for (let col = -1; col <= 1; col++) {
+      const px = cx + col * gap;
+      const py = cy + row * gap;
+
+      // 圆点背景
+      ctx.fillStyle = colors[i];
+      ctx.beginPath();
+      ctx.arc(px, py, r, 0, Math.PI*2);
+      ctx.fill();
+
+      // 高光
+      if (type !== 'emboss') {
+        const hl = ctx.createRadialGradient(px - r*0.3, py - r*0.3, 0, px, py, r);
+        hl.addColorStop(0, 'rgba(255,255,255,0.3)');
+        hl.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = hl;
+        ctx.beginPath();
+        ctx.arc(px, py, r, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      // 食物图标
+      const ec = embossColors ? embossColors[i] : null;
+      drawFood(ctx, px, py, r, foods[i], type, ec);
+
+      i++;
+    }
+  }
+
+  // 中心点强调
+  ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+  ctx.lineWidth = s * 0.01;
+  ctx.beginPath();
+  ctx.arc(cx, cy, r * 1.5, 0, Math.PI*2);
+  ctx.stroke();
+}
+
+// ═══ G1: 细线条 ═══
+function drawG1(ctx, s) { drawPixelIcon(ctx, s, 'line'); }
+
+// ═══ G2: 填充剪影 ═══
+function drawG2(ctx, s) { drawPixelIcon(ctx, s, 'fill'); }
+
+// ═══ G3: 凹陷浮雕 ═══
+function drawG3(ctx, s) {
+  const emboss = [
+    'rgba(180,50,50,0.35)',   // 红深
+    'rgba(200,120,30,0.35)',  // 橙深
+    'rgba(200,180,30,0.35)',  // 黄深
+    'rgba(60,140,60,0.35)',   // 浅绿深
+    'rgba(40,110,40,0.35)',   // 绿深
+    'rgba(30,150,120,0.35)',  // 青深
+    'rgba(60,120,200,0.35)',  // 蓝深
+    'rgba(50,80,180,0.35)',   // 靛深
+    'rgba(110,70,180,0.35)',  // 紫深
+  ];
+  drawPixelIcon(ctx, s, 'emboss', emboss);
+}
+
+// ═══ 渲染 ═══
+const fns = { G1: drawG1, G2: drawG2, G3: drawG3 };
+['G1','G2','G3'].forEach(p => {
+  ['','_48','_72','_96','_128'].forEach(sz => {
+    const id = 'icon' + p + sz;
+    const c = document.getElementById(id);
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    ctx.clearRect(0, 0, c.width, c.height);
+    fns[p](ctx, c.width);
+  });
+});
+
+function pick(v) { alert('已选择 ' + v + '！接下来生成 Android 图标资源文件。'); }
+</script>
+</body>
+</html>

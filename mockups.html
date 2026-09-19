@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DietApp Mockups</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#111; font-family:-apple-system,'PingFang SC','Noto Sans SC',sans-serif; }
+.phone { width:375px; height:812px; margin:40px auto; border-radius:40px; overflow:hidden; position:relative; background:#F5F3ED; box-shadow:0 0 0 8px #333,0 0 0 10px #111,0 20px 60px rgba(0,0,0,0.5); }
+.statusbar { height:44px; background:#2E7D32; display:flex; align-items:flex-end; justify-content:space-between; padding:0 20px 6px; color:#fff; font-size:12px; font-weight:600; }
+.tabbar { position:absolute; bottom:0; left:0; right:0; height:56px; background:#fff; border-top:1px solid #e0e0e0; display:flex; align-items:center; justify-content:space-around; font-size:10px; color:#888; }
+.tabbar .active { color:#4CAF50; font-weight:700; }
+.tab-icon { font-size:20px; text-align:center; }
+.screen-title { font-size:18px; font-weight:700; color:#1B2E1B; padding:16px; }
+.card { background:#fff; border-radius:16px; margin:0 12px 12px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.hero { background:linear-gradient(135deg,#E8F5E9,#C8E6C9); border-radius:20px; margin:0 12px 12px; padding:20px; }
+.macro-pill { display:inline-block; padding:4px 10px; border-radius:999px; font-size:11px; font-weight:600; margin-right:6px; }
+.big-num { font-size:36px; font-weight:800; }
+.section-label { font-size:13px; font-weight:700; color:#546E54; margin:12px 16px 8px; }
+.food-row { display:flex; align-items:center; padding:8px 0; border-bottom:1px solid #f0f0f0; }
+.food-emoji { font-size:24px; margin-right:10px; }
+.food-name { font-size:14px; color:#1B2E1B; flex:1; }
+.food-cal { font-size:14px; color:#E65100; font-weight:600; }
+.msg-user { background:#E8F5E9; border-radius:20px 20px 6px 20px; padding:12px 16px; margin:8px 12px 8px 60px; font-size:14px; color:#1B2E1B; }
+.msg-ai { background:#F1F8E9; border-radius:6px 20px 20px 20px; padding:12px 16px; margin:8px 60px 8px 48px; font-size:14px; color:#1B2E1B; position:relative; }
+.msg-ai::before { content:'🥗'; position:absolute; left:-32px; top:8px; font-size:22px; }
+.input-bar { position:absolute; bottom:56px; left:0; right:0; background:#fff; padding:8px 12px; display:flex; align-items:center; gap:8px; border-top:1px solid #eee; }
+.input-field { flex:1; height:36px; border:1px solid #ddd; border-radius:20px; padding:0 14px; font-size:13px; background:#FFFDF8; }
+.send-btn { width:36px; height:36px; border-radius:50%; background:#4CAF50; color:#fff; display:flex; align-items:center; justify-content:center; font-size:16px; }
+.date-strip { display:flex; gap:6px; padding:8px 12px; overflow-x:auto; }
+.date-item { width:42px; height:56px; border-radius:12px; background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:11px; color:#888; }
+.date-item.active { background:#4CAF50; color:#fff; }
+.date-item .day { font-size:16px; font-weight:700; }
+.progress-bar { height:8px; background:#E8F5E9; border-radius:4px; overflow:hidden; margin:8px 0; }
+.progress-fill { height:100%; border-radius:4px; }
+.stat-card { text-align:center; }
+.stat-val { font-size:28px; font-weight:800; color:#2E7D32; }
+.stat-label { font-size:11px; color:#8A9E8A; }
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:0 12px 12px; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:0 12px 12px; }
+.chart-placeholder { height:120px; background:linear-gradient(180deg,#E8F5E9 0%,#C8E6C9 100%); border-radius:12px; position:relative; overflow:hidden; }
+.chart-bar { position:absolute; bottom:0; width:24px; background:#4CAF50; border-radius:4px 4px 0 0; }
+.heart { color:#E53935; font-size:28px; animation: none; }
+.h2 { font-size:20px; font-weight:700; color:#1B2E1B; }
+.pill-green { background:rgba(76,175,80,0.15); color:#2E7D32; }
+.pill-orange { background:rgba(255,152,0,0.15); color:#E65100; }
+.pill-teal { background:rgba(0,150,136,0.15); color:#00695C; }
+.pill-purple { background:rgba(126,87,194,0.15); color:#5E35B1; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- Screen 1: Dashboard -->
+<!-- ═══════════════════════════════════════ -->
+<div class="phone" id="screen-dashboard">
+  <div class="statusbar"><span>9:41</span><span>📶 🔋</span></div>
+  <div class="screen-title">📊 仪表盘</div>
+
+  <div class="hero">
+    <div style="font-size:13px;color:#546E54;margin-bottom:4px">今日摄入</div>
+    <div class="big-num" style="color:#2E7D32">1,450 <span style="font-size:14px;color:#888">kcal</span></div>
+    <div class="progress-bar" style="margin-top:12px">
+      <div class="progress-fill" style="width:60%;background:#4CAF50"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:#8A9E8A;margin-top:4px">
+      <span>已摄入 1,450</span><span>目标 2,400</span>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card stat-card">
+      <div class="stat-val">950</div>
+      <div class="stat-label">剩余 kcal</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-val" style="color:#009688">320</div>
+      <div class="stat-label">运动消耗</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-val" style="color:#FF9800">78%</div>
+      <div class="stat-label">蛋白质</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:13px;font-weight:700;color:#546E54;margin-bottom:10px">热量趋势</div>
+    <div class="chart-placeholder">
+      <div class="chart-bar" style="left:20px;height:60%"></div>
+      <div class="chart-bar" style="left:56px;height:80%;background:#66BB6A"></div>
+      <div class="chart-bar" style="left:92px;height:45%"></div>
+      <div class="chart-bar" style="left:128px;height:90%;background:#FFA726"></div>
+      <div class="chart-bar" style="left:164px;height:70%"></div>
+      <div class="chart-bar" style="left:200px;height:55%"></div>
+      <div class="chart-bar" style="left:236px;height:75%"></div>
+      <div style="position:absolute;bottom:6px;left:0;right:0;display:flex;justify-content:space-around;font-size:9px;color:#888">
+        <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div style="font-size:11px;color:#888;margin-bottom:6px">营养结构</div>
+      <div>
+        <span class="macro-pill pill-teal">蛋白 68g</span>
+        <span class="macro-pill pill-orange">碳水 180g</span>
+        <span class="macro-pill pill-purple">脂肪 45g</span>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;color:#888;margin-bottom:6px">今日建议</div>
+      <div style="font-size:12px;color:#546E54;line-height:1.6">蛋白质摄入偏低，建议晚餐增加鸡蛋或豆腐</div>
+    </div>
+  </div>
+
+  <div class="tabbar">
+    <div class="active"><div class="tab-icon">📊</div>仪表盘</div>
+    <div><div class="tab-icon">📅</div>日历</div>
+    <div><div class="tab-icon">🤖</div>AI</div>
+    <div><div class="tab-icon">🏃</div>运动</div>
+    <div><div class="tab-icon">👤</div>我的</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- Screen 2: AI Chat -->
+<!-- ═══════════════════════════════════════ -->
+<div class="phone" id="screen-chat" style="margin-top:80px">
+  <div class="statusbar"><span>9:41</span><span>📶 🔋</span></div>
+
+  <!-- AI Header with wave effect simulation -->
+  <div style="background:#fff;margin:8px 12px;border-radius:16px;padding:12px;display:flex;align-items:center;box-shadow:0 2px 8px rgba(76,175,80,0.15)">
+    <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#E8F5E9,#C8E6C9);display:flex;align-items:center;justify-content:center;font-size:24px;position:relative">
+      🥗
+      <div style="position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(76,175,80,0.3)"></div>
+      <div style="position:absolute;inset:-8px;border-radius:50%;border:1.5px solid rgba(76,175,80,0.15)"></div>
+    </div>
+    <div style="margin-left:12px;flex:1">
+      <div style="font-size:16px;font-weight:700;color:#1B2E1B">轻食记 AI <span style="font-size:9px;background:rgba(76,175,80,0.2);color:#2E7D32;padding:2px 6px;border-radius:4px;margin-left:4px">Beta</span></div>
+      <div style="font-size:11px;color:#8A9E8A">你的专属饮食分析助手</div>
+    </div>
+    <div style="border:1px solid #ddd;border-radius:10px;padding:6px 10px;font-size:11px;color:#2E7D32">📷 拍照识别</div>
+  </div>
+
+  <div style="flex:1;overflow:hidden">
+    <div class="msg-user">我刚吃了一碗牛肉面 🍜</div>
+    <div class="msg-ai">根据分析，这碗牛肉面大约包含：<br><br>
+      <div style="background:#fff;border-radius:14px;padding:12px;margin-top:8px;box-shadow:0 2px 6px rgba(0,0,0,0.06)">
+        <div style="font-size:13px;font-weight:600;margin-bottom:8px">🍜 牛肉面</div>
+        <div style="font-size:12px;color:#888;margin-bottom:6px">份量 1.0碗</div>
+        <div>
+          <span class="macro-pill pill-orange">碳水 65g</span>
+          <span class="macro-pill pill-teal">蛋白 28g</span>
+          <span class="macro-pill pill-purple">脂肪 15g</span>
+        </div>
+        <div style="font-size:18px;font-weight:700;color:#E65100;margin-top:8px">520 kcal</div>
+      </div>
+    </div>
+    <div class="msg-user">那我还能吃什么？</div>
+    <div class="msg-ai">按你的目标（2400kcal），今天还剩约 880kcal 的余量。建议：<br><br>🍽 晚餐：糙米饭+清蒸鱼+西兰花（约450kcal）<br>🍪 加餐：一个苹果+一小把坚果（约200kcal）</div>
+  </div>
+
+  <!-- Action chips -->
+  <div style="padding:4px 48px;display:flex;gap:8px">
+    <div style="width:40px;height:40px;background:#E8F5E9;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px">🏃</div>
+    <div style="width:40px;height:40px;background:#E8F5E9;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px">🍽</div>
+    <div style="width:40px;height:40px;background:#E8F5E9;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px">📊</div>
+  </div>
+
+  <div class="input-bar">
+    <div class="input-field" style="display:flex;align-items:center;color:#aaa;font-size:13px">输入你刚刚吃了什么</div>
+    <div style="width:36px;height:36px;border-radius:50%;background:#E8F5E9;display:flex;align-items:center;justify-content:center">📷</div>
+    <div style="width:36px;height:36px;border-radius:50%;background:#E8F5E9;display:flex;align-items:center;justify-content:center">🍽</div>
+    <div class="send-btn">➤</div>
+  </div>
+
+  <div class="tabbar">
+    <div><div class="tab-icon">📊</div>仪表盘</div>
+    <div><div class="tab-icon">📅</div>日历</div>
+    <div class="active"><div class="tab-icon">🤖</div>AI</div>
+    <div><div class="tab-icon">🏃</div>运动</div>
+    <div><div class="tab-icon">👤</div>我的</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- Screen 3: Calendar -->
+<!-- ═══════════════════════════════════════ -->
+<div class="phone" id="screen-calendar" style="margin-top:80px">
+  <div class="statusbar"><span>9:41</span><span>📶 🔋</span></div>
+  <div class="screen-title">📅 饮食日历</div>
+
+  <div class="date-strip">
+    <div class="date-item"><div class="day">1</div>周一</div>
+    <div class="date-item"><div class="day">2</div>周二</div>
+    <div class="date-item"><div class="day">3</div>周三</div>
+    <div class="date-item"><div class="day">4</div>周四</div>
+    <div class="date-item"><div class="day">5</div>周五</div>
+    <div class="date-item active"><div class="day">6</div>周六</div>
+    <div class="date-item"><div class="day">7</div>周日</div>
+    <div class="date-item"><div class="day">8</div>周一</div>
+  </div>
+
+  <div style="padding:8px 16px">
+    <div class="h2">6月6日 星期六</div>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <span class="macro-pill pill-orange" style="font-size:12px">🔥 1,850 kcal</span>
+      <span class="macro-pill pill-teal" style="font-size:12px">💪 蛋白 72g</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;margin-bottom:10px">
+      <span style="font-size:18px;margin-right:6px">☀️</span>
+      <span style="font-size:14px;font-weight:700;color:#1B2E1B">早餐</span>
+      <span style="margin-left:auto;font-size:13px;color:#E65100;font-weight:600">400 kcal</span>
+    </div>
+    <div class="food-row">
+      <span class="food-emoji">🥚</span><span class="food-name">鸡蛋灌饼</span><span class="food-cal">280kcal</span>
+    </div>
+    <div class="food-row">
+      <span class="food-emoji">🥣</span><span class="food-name">黑米粥</span><span class="food-cal">120kcal</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;margin-bottom:10px">
+      <span style="font-size:18px;margin-right:6px">🌤</span>
+      <span style="font-size:14px;font-weight:700;color:#1B2E1B">午餐</span>
+      <span style="margin-left:auto;font-size:13px;color:#E65100;font-weight:600">790 kcal</span>
+    </div>
+    <div class="food-row">
+      <span class="food-emoji">🌶</span><span class="food-name">麻辣香锅</span><span class="food-cal">480kcal</span>
+    </div>
+    <div class="food-row">
+      <span class="food-emoji">🍚</span><span class="food-name">米饭</span><span class="food-cal">230kcal</span>
+    </div>
+    <div class="food-row">
+      <span class="food-emoji">🍵</span><span class="food-name">银耳莲子汤</span><span class="food-cal">80kcal</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;margin-bottom:10px">
+      <span style="font-size:18px;margin-right:6px">🌙</span>
+      <span style="font-size:14px;font-weight:700;color:#1B2E1B">晚餐</span>
+      <span style="margin-left:auto;font-size:13px;color:#E65100;font-weight:600">660 kcal</span>
+    </div>
+    <div class="food-row">
+      <span class="food-emoji">🦀</span><span class="food-name">清蒸大闸蟹</span><span class="food-cal">120kcal</span>
+    </div>
+    <div class="food-row">
+      <span class="food-emoji">🥬</span><span class="food-name">蒜蓉粉丝娃娃菜</span><span class="food-cal">90kcal</span>
+    </div>
+    <div class="food-row">
+      <span class="food-emoji">🥣</span><span class="food-name">小米粥</span><span class="food-cal">120kcal</span>
+    </div>
+  </div>
+
+  <div class="tabbar">
+    <div><div class="tab-icon">📊</div>仪表盘</div>
+    <div class="active"><div class="tab-icon">📅</div>日历</div>
+    <div><div class="tab-icon">🤖</div>AI</div>
+    <div><div class="tab-icon">🏃</div>运动</div>
+    <div><div class="tab-icon">👤</div>我的</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- Screen 4: Exercise / Health -->
+<!-- ═══════════════════════════════════════ -->
+<div class="phone" id="screen-exercise" style="margin-top:80px">
+  <div class="statusbar"><span>9:41</span><span>📶 🔋</span></div>
+  <div class="screen-title">🏃 运动健康</div>
+
+  <div style="background:linear-gradient(135deg,#2E7D32,#4CAF50);border-radius:20px;margin:0 12px 12px;padding:20px;color:#fff;text-align:center;position:relative;overflow:hidden">
+    <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,0.1)"></div>
+    <div style="font-size:13px;opacity:0.8;margin-bottom:8px">实时心率</div>
+    <div style="font-size:54px;font-weight:800">72 <span style="font-size:16px;font-weight:400">bpm</span></div>
+    <div style="margin-top:8px;font-size:20px">💓</div>
+    <div style="font-size:11px;opacity:0.7;margin-top:4px">正常范围</div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:13px;font-weight:700;color:#546E54;margin-bottom:10px">心率曲线</div>
+    <div style="height:80px;position:relative">
+      <svg width="100%" height="80" viewBox="0 0 300 80">
+        <defs>
+          <linearGradient id="hrGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#4CAF50" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#4CAF50" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M0,40 Q30,20 60,35 T120,30 T180,45 T240,25 T300,40" fill="none" stroke="#4CAF50" stroke-width="2"/>
+        <path d="M0,40 Q30,20 60,35 T120,30 T180,45 T240,25 T300,40 V80 H0 Z" fill="url(#hrGrad)"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card stat-card">
+      <div style="font-size:11px;color:#888;margin-bottom:4px">血压</div>
+      <div style="font-size:22px;font-weight:700;color:#009688">120/80</div>
+      <div style="font-size:10px;color:#888">mmHg</div>
+    </div>
+    <div class="card stat-card">
+      <div style="font-size:11px;color:#888;margin-bottom:4px">血糖</div>
+      <div style="font-size:22px;font-weight:700;color:#FF9800">5.6</div>
+      <div style="font-size:10px;color:#888">mmol/L</div>
+    </div>
+    <div class="card stat-card">
+      <div style="font-size:11px;color:#888;margin-bottom:4px">步数</div>
+      <div style="font-size:22px;font-weight:700;color:#4CAF50">8,432</div>
+      <div style="font-size:10px;color:#888">步</div>
+    </div>
+    <div class="card stat-card">
+      <div style="font-size:11px;color:#888;margin-bottom:4px">消耗</div>
+      <div style="font-size:22px;font-weight:700;color:#E65100">320</div>
+      <div style="font-size:10px;color:#888">kcal</div>
+    </div>
+  </div>
+
+  <div class="tabbar">
+    <div><div class="tab-icon">📊</div>仪表盘</div>
+    <div><div class="tab-icon">📅</div>日历</div>
+    <div><div class="tab-icon">🤖</div>AI</div>
+    <div class="active"><div class="tab-icon">🏃</div>运动</div>
+    <div><div class="tab-icon">👤</div>我的</div>
+  </div>
+</div>
+
+</body>
+</html>

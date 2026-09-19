@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">轻食记</string>
+    <string name="nav_home">首页</string>
+    <string name="nav_calendar">日历</string>
+    <string name="nav_dashboard">看板</string>
+    <string name="nav_profile">我的</string>
+    <string name="breakfast">早餐</string>
+    <string name="lunch">午餐</string>
+    <string name="dinner">晚餐</string>
+    <string name="snack">加餐</string>
+    <string name="text_input">文字输入</string>
+    <string name="photo">拍照识别</string>
+    <string name="template">快捷模板</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="delete">删除</string>
+    <string name="add_exercise">添加运动</string>
+    <string name="body_data">身体数据</string>
+    <string name="today_summary">今日总结</string>
+</resources>

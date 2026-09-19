@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 8dp spacing rhythm -->
+    <dimen name="space_xs">4dp</dimen>
+    <dimen name="space_sm">8dp</dimen>
+    <dimen name="space_md">12dp</dimen>
+    <dimen name="space_lg">16dp</dimen>
+    <dimen name="space_xl">20dp</dimen>
+    <dimen name="space_2xl">24dp</dimen>
+    <dimen name="space_3xl">32dp</dimen>
+
+    <dimen name="radius_sm">8dp</dimen>
+    <dimen name="radius_md">12dp</dimen>
+    <dimen name="radius_lg">16dp</dimen>
+    <dimen name="radius_xl">20dp</dimen>
+    <dimen name="radius_pill">28dp</dimen>
+
+    <dimen name="touch_min">48dp</dimen>
+    <dimen name="icon_sm">20dp</dimen>
+    <dimen name="icon_md">24dp</dimen>
+    <dimen name="icon_lg">28dp</dimen>
+
+    <dimen name="input_height">52dp</dimen>
+    <dimen name="btn_height">52dp</dimen>
+    <dimen name="btn_height_sm">44dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="bottom_nav_elevation">12dp</dimen>
+    <dimen name="page_padding_h">16dp</dimen>
+    <dimen name="page_padding_v">16dp</dimen>
+</resources>

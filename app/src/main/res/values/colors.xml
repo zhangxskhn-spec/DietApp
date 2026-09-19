@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="green">#6EA77A</color>
+    <color name="green_dark">#365B40</color>
+    <color name="green_deep">#284832</color>
+    <color name="green_light">#DCECD9</color>
+    <color name="green_bg">#F1F7EF</color>
+
+    <color name="orange">#E28F60</color>
+    <color name="orange_dark">#B96A44</color>
+    <color name="orange_light">#FBE7DA</color>
+    <color name="orange_bg">#FFF5ED</color>
+
+    <color name="teal">#63AAA2</color>
+    <color name="teal_dark">#356E67</color>
+    <color name="teal_light">#D8EFEB</color>
+    <color name="teal_bg">#EEF8F6</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#243126</color>
+    <color name="text_primary">#243126</color>
+    <color name="text_secondary">#677066</color>
+    <color name="text_tertiary">#8E968B</color>
+    <color name="gray">#8E968B</color>
+    <color name="gray_light">#F7F3EE</color>
+    <color name="gray_border">#DCD4C8</color>
+    <color name="gray_divider">#E9E2D8</color>
+
+    <color name="red">#C96355</color>
+    <color name="red_light">#F9E5E1</color>
+    <color name="red_surface">#FFF6F3</color>
+    <color name="yellow">#E0B65D</color>
+    <color name="yellow_light">#FFF3D8</color>
+    <color name="blue">#6A8FBF</color>
+    <color name="blue_light">#EAF1FA</color>
+    <color name="purple">#8E7BC1</color>
+    <color name="purple_light">#F2ECFA</color>
+
+    <color name="meal_breakfast">#E9A55E</color>
+    <color name="meal_breakfast_bg">#FFF6E9</color>
+    <color name="meal_lunch">#6EA77A</color>
+    <color name="meal_lunch_bg">#F1F7EF</color>
+    <color name="meal_dinner">#63AAA2</color>
+    <color name="meal_dinner_bg">#EEF8F6</color>
+    <color name="meal_snack">#A38AD4</color>
+    <color name="meal_snack_bg">#F5F1FC</color>
+
+    <color name="bg">#F7F4EE</color>
+    <color name="bg_warm">#FBF7F1</color>
+    <color name="card_bg">#FFFCF8</color>
+    <color name="surface_elevated">#FFFCF8</color>
+    <color name="input_fill">#F4EFE7</color>
+    <color name="input_fill_focus">#FFFCF8</color>
+    <color name="light_gray">#F8F4ED</color>
+    <color name="nav_indicator">#E7F0E6</color>
+
+    <color name="gradient_green_start">#85B58C</color>
+    <color name="gradient_green_end">#5E8E68</color>
+    <color name="gradient_orange_start">#F0B07A</color>
+    <color name="gradient_orange_end">#E28F60</color>
+    <color name="gradient_teal_start">#78BBB3</color>
+    <color name="gradient_teal_end">#4C968D</color>
+
+    <!-- 应用图标背景色 -->
+    <color name="ic_launcher_background">#5BBD72</color>
+</resources>

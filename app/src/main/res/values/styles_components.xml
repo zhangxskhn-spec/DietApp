@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 填充式输入框 — 圆角、浅灰底、聚焦绿边 -->
+    <style name="Widget.DietApp.TextInput" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxCornerRadiusTopStart">@dimen/radius_md</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_md</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_md</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_md</item>
+        <item name="boxBackgroundColor">@color/input_box_background</item>
+        <item name="boxStrokeColor">@color/input_stroke_color</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="hintTextColor">@color/text_tertiary</item>
+        <item name="android:textColorHint">@color/text_tertiary</item>
+    </style>
+
+    <!-- 轮廓式输入框 — 弹窗、次要表单 -->
+    <style name="Widget.DietApp.TextInput.Outlined" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/radius_md</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_md</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_md</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_md</item>
+        <item name="boxStrokeColor">@color/input_stroke_color</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="hintTextColor">@color/text_tertiary</item>
+    </style>
+
+    <!-- 下拉选择（Exposed Dropdown） -->
+    <style name="Widget.DietApp.TextInput.Dropdown" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxCornerRadiusTopStart">@dimen/radius_md</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_md</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_md</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_md</item>
+        <item name="boxStrokeColor">@color/input_stroke_color</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="endIconMode">dropdown_menu</item>
+    </style>
+
+    <style name="Widget.DietApp.TextInputEdit" parent="Widget.Material3.TextInputEditText.FilledBox">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:minHeight">@dimen/input_height</item>
+    </style>
+
+    <!-- 主按钮 — 渐变药丸 -->
+    <style name="Widget.DietApp.Button.Primary" parent="Widget.Material3.Button">
+        <item name="cornerRadius">@dimen/radius_pill</item>
+        <item name="android:background">@drawable/bg_btn_primary</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:minHeight">@dimen/btn_height</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="rippleColor">#40FFFFFF</item>
+    </style>
+
+    <!-- 次要按钮 -->
+    <style name="Widget.DietApp.Button.Secondary" parent="Widget.Material3.Button.TonalButton">
+        <item name="cornerRadius">@dimen/radius_pill</item>
+        <item name="backgroundTint">@color/green_bg</item>
+        <item name="android:textColor">@color/green_dark</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:minHeight">@dimen/btn_height_sm</item>
+    </style>
+
+    <!-- 描边按钮 -->
+    <style name="Widget.DietApp.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">@dimen/radius_pill</item>
+        <item name="strokeColor">@color/green</item>
+        <item name="strokeWidth">1.5dp</item>
+        <item name="android:textColor">@color/green_dark</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:minHeight">@dimen/btn_height_sm</item>
+    </style>
+
+    <!-- 图标按钮 48dp -->
+    <style name="Widget.DietApp.Button.Icon" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
+        <item name="android:minWidth">@dimen/touch_min</item>
+        <item name="android:minHeight">@dimen/touch_min</item>
+        <item name="iconSize">@dimen/icon_md</item>
+        <item name="backgroundTint">@color/green_bg</item>
+        <item name="iconTint">@color/green_dark</item>
+    </style>
+
+    <style name="Widget.DietApp.Button.Icon.Primary" parent="Widget.Material3.Button.IconButton.Filled">
+        <item name="android:minWidth">@dimen/touch_min</item>
+        <item name="android:minHeight">@dimen/touch_min</item>
+        <item name="iconSize">@dimen/icon_md</item>
+        <item name="backgroundTint">@color/green</item>
+        <item name="iconTint">@color/white</item>
+    </style>
+
+    <!-- 卡片 -->
+    <style name="Widget.DietApp.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">@dimen/radius_lg</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="cardBackgroundColor">@color/card_bg</item>
+        <item name="contentPadding">@dimen/space_lg</item>
+    </style>
+
+    <!-- Chip 筛选 -->
+    <style name="Widget.DietApp.Chip.Filter" parent="Widget.Material3.Chip.Filter">
+        <item name="chipCornerRadius">@dimen/radius_pill</item>
+        <item name="chipMinHeight">40dp</item>
+        <item name="chipBackgroundColor">@color/chip_background_color</item>
+        <item name="chipStrokeColor">@color/green_light</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">@color/chip_text_color</item>
+        <item name="checkedIconVisible">false</item>
+    </style>
+
+    <!-- 底部导航 -->
+    <style name="Widget.DietApp.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemIconTint">@color/bottom_nav_color</item>
+        <item name="itemTextColor">@color/bottom_nav_color</item>
+        <item name="itemRippleColor">@color/green_light</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.DietApp.BottomNav.Indicator</item>
+    </style>
+
+    <style name="Widget.DietApp.BottomNav.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/green_bg</item>
+    </style>
+
+    <!-- 页面标题 -->
+    <style name="TextAppearance.DietApp.PageTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.DietApp.SectionTitle" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.DietApp.Caption" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="Widget.DietApp.TabLayout" parent="Widget.Material3.TabLayout">
+        <item name="tabIndicatorColor">@color/green</item>
+        <item name="tabSelectedTextColor">@color/green_dark</item>
+        <item name="tabTextColor">@color/text_secondary</item>
+        <item name="tabRippleColor">@color/green_light</item>
+        <item name="tabIndicatorHeight">3dp</item>
+    </style>
+</resources>

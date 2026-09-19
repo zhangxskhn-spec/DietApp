@@ -1,0 +1,31 @@
+# ============================
+# DietApp Android .gitignore
+# ============================
+
+# Gradle 构建缓存
+.gradle/
+build/
+app/build/
+local.properties
+
+# IDE
+.idea/
+*.iml
+*.swp
+*.swo
+
+# NDK
+.cxx/
+
+# Node / Python 辅助工具
+node_modules/
+.python-packages/
+
+# 本地演示与生成物
+ppt_assets/
+*.log
+debug.log
+
+# OS
+.DS_Store
+Thumbs.db

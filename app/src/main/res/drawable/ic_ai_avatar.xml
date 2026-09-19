@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- AI 营养助手头像：圆形底 + 叶片 + AI 光点 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+
+    <!-- ═══ 圆形渐变底座 ═══ -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M48,48 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" />
+
+    <!-- ═══ 底座内层渐变 ═══ -->
+    <path
+        android:fillColor="#66BB6A"
+        android:pathData="M48,42 m-34,0 a34,34 0 1,1 68,0 a34,34 0 1,1 -68,0"
+        android:fillAlpha="0.4" />
+
+    <!-- ═══ 高光区（左上） ═══ -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,28 m-18,0 a18,18 0 1,1 36,0 a18,18 0 1,1 -36,0"
+        android:fillAlpha="0.12" />
+
+    <!-- ═══ 主叶片 ═══ -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M48,22 C48,22 38,28 36,38 C34,48 40,56 48,56 C56,56 62,48 60,38 C58,28 48,22 48,22Z" />
+
+    <!-- ═══ 叶片左半高光 ═══ -->
+    <path
+        android:fillColor="#E8F5E9"
+        android:pathData="M48,24 C48,24 39,30 38,38 C37,46 41,52 48,52 L48,24Z"
+        android:fillAlpha="0.5" />
+
+    <!-- ═══ 叶脉主干 ═══ -->
+    <path
+        android:fillColor="@null"
+        android:strokeColor="#2E7D32"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M48,26 L48,52" />
+
+    <!-- ═══ 叶脉分支 ═══ -->
+    <path
+        android:fillColor="@null"
+        android:strokeColor="#388E3C"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:pathData="M48,34 C44,33 40,36 39,39" />
+    <path
+        android:fillColor="@null"
+        android:strokeColor="#388E3C"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:pathData="M48,34 C52,33 56,36 57,39" />
+    <path
+        android:fillColor="@null"
+        android:strokeColor="#43A047"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:pathData="M48,42 C44,41 41,44 40,47" />
+    <path
+        android:fillColor="@null"
+        android:strokeColor="#43A047"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:pathData="M48,42 C52,41 55,44 56,47" />
+
+    <!-- ═══ 叶尖高光 ═══ -->
+    <path
+        android:fillColor="#C8E6C9"
+        android:pathData="M48,22 C48,22 46,26 48,28 C50,26 48,22 48,22Z"
+        android:fillAlpha="0.6" />
+
+    <!-- ═══ AI 光点（右上角，代表智能） ═══ -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M66,24 m-4,0 a4,4 0 1,1 8,0 a4,4 0 1,1 -8,0"
+        android:fillAlpha="0.9" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M66,24 m-2,0 a2,2 0 1,1 4,0 a2,2 0 1,1 -4,0"
+        android:fillAlpha="0.6" />
+
+    <!-- ═══ AI 光晕 ═══ -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M66,24 m-7,0 a7,7 0 1,1 14,0 a7,7 0 1,1 -14,0"
+        android:fillAlpha="0.15" />
+
+    <!-- ═══ 底部弧形装饰线 ═══ -->
+    <path
+        android:fillColor="@null"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M30,66 C36,72 42,75 48,76 C54,75 60,72 66,66"
+        android:fillAlpha="0.4" />
+</vector>

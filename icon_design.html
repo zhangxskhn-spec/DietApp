@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DietApp Icon 设计方案</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #F5F3ED;
+      font-family: -apple-system, 'PingFang SC', 'Segoe UI', sans-serif;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    h1 {
+      color: #1B2E1B;
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: #8A9E8A;
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      max-width: 960px;
+      width: 100%;
+    }
+    .card {
+      background: #FFFDF8;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card h2 {
+      color: #1B2E1B;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .card .desc {
+      color: #546E54;
+      font-size: 13px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .icon-preview {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    canvas {
+      border-radius: 22%;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+    .sizes {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+    }
+    .sizes canvas {
+      border-radius: 22%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .size-label {
+      text-align: center;
+      color: #8A9E8A;
+      font-size: 10px;
+      margin-top: 4px;
+    }
+    .pick-btn {
+      margin-top: 16px;
+      padding: 10px 28px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .pick-btn:hover { background: #2E7D32; }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #E8F5E9;
+      color: #2E7D32;
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🥗 轻食记 — App 图标重设计</h1>
+<p class="subtitle">基于 app 设计语言（暖米底 + 绿色主调 + 大圆角 + 健康饮食主题）</p>
+
+<div class="grid">
+
+  <!-- 方案 A -->
+  <div class="card">
+    <span class="badge">方案 A · 推荐</span>
+    <h2>碗 + 叶子</h2>
+    <p class="desc">沙拉碗中长出一片嫩叶，象征「饮食 × 健康」<br>辨识度高，一眼就知道是饮食类 app</p>
+    <div class="icon-preview">
+      <canvas id="iconA" width="192" height="192"></canvas>
+    </div>
+    <div class="sizes">
+      <div><canvas id="iconA_48" width="48" height="48"></canvas><div class="size-label">48dp</div></div>
+      <div><canvas id="iconA_72" width="72" height="72"></canvas><div class="size-label">72dp</div></div>
+      <div><canvas id="iconA_96" width="96" height="96"></canvas><div class="size-label">96dp</div></div>
+    </div>
+    <button class="pick-btn" onclick="select('A')">选择方案 A</button>
+  </div>
+
+  <!-- 方案 B -->
+  <div class="card">
+    <span class="badge">方案 B</span>
+    <h2>苹果 + 咬口</h2>
+    <p class="desc">经典苹果轮廓带一口咬痕，<br>简洁现代，高辨识度</p>
+    <div class="icon-preview">
+      <canvas id="iconB" width="192" height="192"></canvas>
+    </div>
+    <div class="sizes">
+      <div><canvas id="iconB_48" width="48" height="48"></canvas><div class="size-label">48dp</div></div>
+      <div><canvas id="iconB_72" width="72" height="72"></canvas><div class="size-label">72dp</div></div>
+      <div><canvas id="iconB_96" width="96" height="96"></canvas><div class="size-label">96dp</div></div>
+    </div>
+    <button class="pick-btn" onclick="select('B')">选择方案 B</button>
+  </div>
+
+  <!-- 方案 C -->
+  <div class="card">
+    <span class="badge">方案 C</span>
+    <h2>盘子 + 箭头</h2>
+    <p class="desc">圆形盘子配向上的营养箭头，<br>暗示「吃得健康，向上生长」</p>
+    <div class="icon-preview">
+      <canvas id="iconC" width="192" height="192"></canvas>
+    </div>
+    <div class="sizes">
+      <div><canvas id="iconC_48" width="48" height="48"></canvas><div class="size-label">48dp</div></div>
+      <div><canvas id="iconC_72" width="72" height="72"></canvas><div class="size-label">72dp</div></div>
+      <div><canvas id="iconC_96" width="96" height="96"></canvas><div class="size-label">96dp</div></div>
+    </div>
+    <button class="pick-btn" onclick="select('C')">选择方案 C</button>
+  </div>
+
+</div>
+
+<script>
+// ═══ 配色 ═══
+const PAL = {
+  green:     '#4CAF50',
+  greenDark: '#2E7D32',
+  greenMid:  '#388E3C',
+  greenLight:'#81C784',
+  greenPale: '#C8E6C9',
+  white:     '#FFFFFF',
+  warmWhite: '#FFFDF8',
+};
+
+// ═══ 绘制函数 ═══
+
+function drawIconA(ctx, s) {
+  // 背景：绿色渐变
+  const bg = ctx.createLinearGradient(0, 0, 0, s);
+  bg.addColorStop(0, '#81C784');
+  bg.addColorStop(0.5, '#4CAF50');
+  bg.addColorStop(1, '#2E7D32');
+  ctx.fillStyle = bg;
+  ctx.beginPath();
+  roundRect(ctx, 0, 0, s, s, s * 0.22);
+  ctx.fill();
+
+  const cx = s / 2, cy = s / 2;
+
+  // 碗 — 白色半圆
+  ctx.fillStyle = PAL.white;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy + s * 0.08, s * 0.34, s * 0.22, 0, 0, Math.PI);
+  ctx.closePath();
+  ctx.fill();
+
+  // 碗口描边
+  ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+  ctx.lineWidth = s * 0.015;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy + s * 0.08, s * 0.34, s * 0.06, 0, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // 叶子 — 从碗中长出
+  ctx.save();
+  ctx.translate(cx, cy - s * 0.02);
+
+  // 叶片
+  ctx.fillStyle = PAL.white;
+  ctx.beginPath();
+  ctx.moveTo(0, s * 0.08);
+  ctx.bezierCurveTo(-s * 0.18, -s * 0.08, -s * 0.12, -s * 0.28, 0, -s * 0.32);
+  ctx.bezierCurveTo(s * 0.12, -s * 0.28, s * 0.18, -s * 0.08, 0, s * 0.08);
+  ctx.fill();
+
+  // 叶脉
+  ctx.strokeStyle = PAL.greenPale;
+  ctx.lineWidth = s * 0.012;
+  ctx.beginPath();
+  ctx.moveTo(0, s * 0.06);
+  ctx.lineTo(0, -s * 0.28);
+  ctx.stroke();
+  // 侧脉
+  for (let i = 0; i < 3; i++) {
+    const yy = -s * 0.04 - i * s * 0.08;
+    ctx.beginPath();
+    ctx.moveTo(0, yy);
+    ctx.quadraticCurveTo(-s * 0.06, yy - s * 0.03, -s * 0.09, yy - s * 0.01);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0, yy);
+    ctx.quadraticCurveTo(s * 0.06, yy - s * 0.03, s * 0.09, yy - s * 0.01);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+
+  // 蒸汽线条 — 3 条
+  ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+  ctx.lineWidth = s * 0.015;
+  ctx.lineCap = 'round';
+  for (let i = -1; i <= 1; i++) {
+    const sx = cx + i * s * 0.1;
+    ctx.beginPath();
+    ctx.moveTo(sx, cy - s * 0.08);
+    ctx.bezierCurveTo(sx - s * 0.03, cy - s * 0.16, sx + s * 0.03, cy - s * 0.2, sx, cy - s * 0.24);
+    ctx.stroke();
+  }
+}
+
+function drawIconB(ctx, s) {
+  // 背景
+  const bg = ctx.createLinearGradient(0, 0, s, s);
+  bg.addColorStop(0, '#66BB6A');
+  bg.addColorStop(1, '#2E7D32');
+  ctx.fillStyle = bg;
+  ctx.beginPath();
+  roundRect(ctx, 0, 0, s, s, s * 0.22);
+  ctx.fill();
+
+  const cx = s / 2, cy = s / 2 + s * 0.04;
+
+  // 苹果主体
+  ctx.fillStyle = PAL.white;
+  ctx.beginPath();
+  // 左半
+  ctx.moveTo(cx, cy - s * 0.24);
+  ctx.bezierCurveTo(cx - s * 0.02, cy - s * 0.32, cx - s * 0.28, cy - s * 0.32, cx - s * 0.3, cy - s * 0.1);
+  ctx.bezierCurveTo(cx - s * 0.32, cy + s * 0.12, cx - s * 0.16, cy + s * 0.28, cx, cy + s * 0.26);
+  // 右半
+  ctx.bezierCurveTo(cx + s * 0.16, cy + s * 0.28, cx + s * 0.32, cy + s * 0.12, cx + s * 0.3, cy - s * 0.1);
+  ctx.bezierCurveTo(cx + s * 0.28, cy - s * 0.32, cx + s * 0.02, cy - s * 0.32, cx, cy - s * 0.24);
+  ctx.fill();
+
+  // 咬口 — 右上
+  ctx.fillStyle = bg; // 用背景色"咬掉"
+  ctx.beginPath();
+  ctx.arc(cx + s * 0.22, cy - s * 0.12, s * 0.1, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 叶子
+  ctx.fillStyle = PAL.greenPale;
+  ctx.save();
+  ctx.translate(cx + s * 0.02, cy - s * 0.26);
+  ctx.rotate(-0.3);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.bezierCurveTo(-s * 0.04, -s * 0.08, s * 0.02, -s * 0.14, s * 0.06, -s * 0.1);
+  ctx.bezierCurveTo(s * 0.08, -s * 0.06, s * 0.04, s * 0.02, 0, 0);
+  ctx.fill();
+  ctx.restore();
+
+  // 茎
+  ctx.strokeStyle = PAL.greenPale;
+  ctx.lineWidth = s * 0.018;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - s * 0.24);
+  ctx.quadraticCurveTo(cx + s * 0.02, cy - s * 0.3, cx + s * 0.04, cy - s * 0.28);
+  ctx.stroke();
+}
+
+function drawIconC(ctx, s) {
+  // 背景
+  const bg = ctx.createLinearGradient(0, 0, 0, s);
+  bg.addColorStop(0, '#81C784');
+  bg.addColorStop(1, '#388E3C');
+  ctx.fillStyle = bg;
+  ctx.beginPath();
+  roundRect(ctx, 0, 0, s, s, s * 0.22);
+  ctx.fill();
+
+  const cx = s / 2, cy = s / 2 + s * 0.06;
+
+  // 盘子 — 椭圆
+  ctx.fillStyle = PAL.white;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy, s * 0.34, s * 0.18, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 盘子内圈
+  ctx.strokeStyle = PAL.greenPale;
+  ctx.lineWidth = s * 0.012;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy, s * 0.26, s * 0.13, 0, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // 向上箭头 — 生长
+  ctx.fillStyle = PAL.white;
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - s * 0.06);
+  ctx.lineTo(cx - s * 0.08, cy + s * 0.04);
+  ctx.lineTo(cx - s * 0.03, cy + s * 0.04);
+  ctx.lineTo(cx - s * 0.03, cy + s * 0.1);
+  ctx.lineTo(cx + s * 0.03, cy + s * 0.1);
+  ctx.lineTo(cx + s * 0.03, cy + s * 0.04);
+  ctx.lineTo(cx + s * 0.08, cy + s * 0.04);
+  ctx.closePath();
+  ctx.fill();
+
+  // 小叶子 — 箭头顶部长出
+  ctx.fillStyle = PAL.greenPale;
+  ctx.save();
+  ctx.translate(cx, cy - s * 0.06);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.bezierCurveTo(-s * 0.06, -s * 0.06, -s * 0.02, -s * 0.14, s * 0.02, -s * 0.12);
+  ctx.bezierCurveTo(s * 0.05, -s * 0.1, s * 0.04, -s * 0.02, 0, 0);
+  ctx.fill();
+  ctx.restore();
+
+  // 装饰小点
+  ctx.fillStyle = 'rgba(255,255,255,0.25)';
+  const dots = [[-0.2, -0.22], [0.22, -0.18], [-0.18, 0.22], [0.2, 0.2], [0, -0.3]];
+  dots.forEach(([dx, dy]) => {
+    ctx.beginPath();
+    ctx.arc(cx + dx * s, cy + dy * s, s * 0.015, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.arcTo(x + w, y, x + w, y + r, r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+  ctx.lineTo(x + r, y + h);
+  ctx.arcTo(x, y + h, x, y + h - r, r);
+  ctx.lineTo(x, y + r);
+  ctx.arcTo(x, y, x + r, y, r);
+}
+
+// ═══ 渲染所有图标 ═══
+function renderAll() {
+  const icons = [
+    ['iconA', drawIconA], ['iconA_48', drawIconA], ['iconA_72', drawIconA], ['iconA_96', drawIconA],
+    ['iconB', drawIconB], ['iconB_48', drawIconB], ['iconB_72', drawIconB], ['iconB_96', drawIconB],
+    ['iconC', drawIconC], ['iconC_48', drawIconC], ['iconC_72', drawIconC], ['iconC_96', drawIconC],
+  ];
+  icons.forEach(([id, draw]) => {
+    const c = document.getElementById(id);
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    ctx.clearRect(0, 0, c.width, c.height);
+    draw(ctx, c.width);
+  });
+}
+
+function select(plan) {
+  alert('已选择方案 ' + plan + '！接下来会生成对应的 Android 图标资源。');
+  window.selectedPlan = plan;
+}
+
+renderAll();
+</script>
+</body>
+</html>

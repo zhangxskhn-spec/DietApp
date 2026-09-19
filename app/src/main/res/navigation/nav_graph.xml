@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_chat">
+
+    <fragment
+        android:id="@+id/nav_chat"
+        android:name="com.dietapp.ui.chat.ChatFragment"
+        android:label="AI助手" />
+
+    <fragment
+        android:id="@+id/nav_calendar"
+        android:name="com.dietapp.ui.calendar.CalendarFragment"
+        android:label="饮食日记" />
+
+    <fragment
+        android:id="@+id/nav_exercise"
+        android:name="com.dietapp.ui.exercise.ExerciseFragment"
+        android:label="实时监测" />
+
+    <fragment
+        android:id="@+id/nav_dashboard"
+        android:name="com.dietapp.ui.dashboard.DashboardFragment"
+        android:label="数据看板" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.dietapp.ui.profile.ProfileFragment"
+        android:label="我的" />
+</navigation>
