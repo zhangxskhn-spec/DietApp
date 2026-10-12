@@ -2,6 +2,18 @@
 
 面向日常饮食管理的安卓客户端：记录三餐与营养素、AI 对话建议、菜品拍照识别、运动与体脂趋势。
 
+## 界面预览
+
+| 仪表盘 | AI 对话 |
+|---|---|
+| ![仪表盘](docs/screenshots/dashboard.png) | ![AI 对话](docs/screenshots/chat.png) |
+
+| 饮食日历 | 运动健康 |
+|---|---|
+| ![饮食日历](docs/screenshots/calendar.png) | ![运动健康](docs/screenshots/exercise.png) |
+
+> 截图由 `docs/design/mockups.html` 渲染而来（该文件是界面原型，可直接用浏览器打开）。
+
 ## 功能
 
 - **饮食记录**：按早/午/晚/加餐录入食物，本地食物知识库估算热量与三大营养素
@@ -27,6 +39,9 @@ DietApp/
 │   ├── data/        # repository · api · 本地知识库 · 用户偏好
 │   └── MainActivity.kt
 ├── app/src/main/res/
+├── docs/
+│   ├── screenshots/ # README 用的界面截图
+│   └── design/      # 界面原型（mockups.html 及图标探索稿），可用浏览器直接打开
 └── build.gradle.kts
 ```
 
